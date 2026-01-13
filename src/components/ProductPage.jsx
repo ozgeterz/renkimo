@@ -7,8 +7,20 @@ import st3 from "../assets/st3.webp";
 const cities = Object.keys(citiesAndDistricts);
 
 const products = [
-  { quantity: 1, price: 1499, shipping: 0, freeShipping: true },
-  { quantity: 2, price: 2500, shipping: 0, freeShipping: true },
+  {
+    quantity: 1,
+    price: 1499,
+    originalPrice: 1999,
+    shipping: 0,
+    freeShipping: true,
+  },
+  {
+    quantity: 2,
+    price: 2500,
+    originalPrice: 3500,
+    shipping: 0,
+    freeShipping: true,
+  },
 ];
 
 function ProductPage() {
@@ -392,24 +404,29 @@ function ProductPage() {
                         className="w-5 h-5 text-purple-500"
                       />
                       <div>
-                        <div className="font-bold text-gray-800 text-lg">
+                        <div className="font-semibold text-gray-800 text-base">
                           {product.quantity} Adet AYICIK
                         </div>
-                        <div className="text-purple-600 font-bold text-xl">
-                          {product.price} TL
+                        <div className="flex items-center gap-2 mt-1">
+                          <span className="text-gray-400 line-through text-sm">
+                            {product.originalPrice} TL
+                          </span>
+                          <span className="text-purple-600 font-bold text-lg">
+                            {product.price} TL
+                          </span>
                         </div>
                       </div>
                     </div>
                     <div className="text-right">
-                      {product.freeShipping ? (
-                        <span className="text-green-600 font-bold text-sm bg-green-100 px-3 py-2 rounded-lg border-2 border-green-300 animate-pulse">
-                          🎁 ÜCRETSİZ KARGO
-                        </span>
-                      ) : (
-                        <span className="text-gray-600 font-semibold text-sm">
-                          + {product.shipping} TL kargo
-                        </span>
-                      )}
+                      <div className="bg-red-100 text-red-600 font-bold text-xs px-2 py-1 rounded">
+                        %
+                        {Math.round(
+                          ((product.originalPrice - product.price) /
+                            product.originalPrice) *
+                            100
+                        )}{" "}
+                        İNDİRİM
+                      </div>
                     </div>
                   </label>
                 ))}
@@ -471,15 +488,13 @@ function ProductPage() {
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Kargo</span>
-                <span className="font-semibold text-green-600">
-                  {selectedProduct?.shipping === 0
-                    ? "ÜCRETSİZ"
-                    : `${selectedProduct?.shipping} TL`}
+                <span className="font-bold text-green-600 flex items-center gap-1">
+                  ÜCRETSİZ 🎁
                 </span>
               </div>
-              <div className="border-t pt-2 flex justify-between">
-                <span className="font-bold text-lg">Toplam</span>
-                <span className="font-bold text-2xl text-purple-600">
+              <div className="border-t pt-2 flex justify-between items-center">
+                <span className="font-bold text-base">Toplam</span>
+                <span className="font-bold text-xl text-purple-600">
                   {total} TL
                 </span>
               </div>
