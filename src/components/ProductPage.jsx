@@ -121,7 +121,7 @@ function ProductPage() {
     if (formRef.current) {
       const elementPosition = formRef.current.getBoundingClientRect().top;
       const offsetPosition =
-        elementPosition + window.pageYOffset - window.innerHeight / 2 + 450;
+        elementPosition + window.pageYOffset - window.innerHeight / 2 + 270;
 
       window.scrollTo({
         top: offsetPosition,
@@ -131,10 +131,7 @@ function ProductPage() {
   };
 
   return (
-    <div
-      className="min-h-screen bg-gradient-to-b from-purple-50 to-pink-50 w-full max-w-[390px] mx-auto"
-      onClick={handlePageClick}
-    >
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-pink-50 w-full max-w-[390px] mx-auto">
       <div className="max-w-md ">
         <div className="bg-white shadow-xl">
           <div className="p-6 pb-0">
@@ -162,7 +159,7 @@ function ProductPage() {
             </div>
           </div>
 
-          <div className="w-full leading-[0]">
+          <div className="w-full leading-[0]" onClick={handlePageClick}>
             {productImages.map((img, index) => (
               <img
                 key={index}
