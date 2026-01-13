@@ -8,7 +8,7 @@ function App() {
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-blue-50">
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/tuval" element={<ProductPage />} />
+        <Route path="/ayicik" element={<ProductPage />} />
         <Route path="/tesekkurler" element={<ThankYou />} />
       </Routes>
     </div>

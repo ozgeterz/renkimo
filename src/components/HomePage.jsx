@@ -21,15 +21,15 @@ function HomePage() {
         >
           <div className="relative">
             <h1 className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-pulse">
-              🎨 Renkimo
+              🧸 Renkimo
             </h1>
           </div>
           <p className="text-2xl font-bold text-gray-800">
-            Çocuğunuzun İlk Sanat Eseri
+            Uyku Arkadaşı Ayıcık
           </p>
           <p className="text-lg text-gray-600 leading-relaxed italic">
-            "Her çocuk bir sanatçıdır, sorun büyüdükçe sanatçı olarak nasıl
-            kalacağıdır."
+            "Huzurlu uykular, mutlu sabahlar - Sevimli arkadaşıyla güvenli
+            geceler"
           </p>
         </div>
 
@@ -38,97 +38,97 @@ function HomePage() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <div className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white p-5 rounded-2xl shadow-2xl border-4 border-yellow-300 animate-pulse">
+          <div className="bg-gradient-to-r from-blue-400 to-purple-400 text-white p-5 rounded-2xl shadow-2xl border-4 border-blue-300 animate-pulse">
             <div className="flex items-center justify-center gap-2 mb-3">
-              <span className="text-3xl">🎨</span>
+              <span className="text-3xl">🎵</span>
               <p className="text-lg font-bold text-center">
-                HEDİYE: 6 RENK BOYA SETİ!
+                SESLİ VE IŞIKLI ÖZELLİK!
               </p>
-              <span className="text-3xl">🎁</span>
+              <span className="text-3xl">💡</span>
             </div>
-            <div className="flex justify-center gap-2 mb-3">
+            <div className="flex justify-center gap-3 mb-3">
               <span
-                className="w-8 h-8 bg-red-500 rounded-full border-3 border-white shadow-lg animate-bounce"
+                className="text-3xl animate-bounce"
                 style={{ animationDelay: "0s" }}
-              ></span>
+              >
+                🎶
+              </span>
               <span
-                className="w-8 h-8 bg-blue-500 rounded-full border-3 border-white shadow-lg animate-bounce"
-                style={{ animationDelay: "0.1s" }}
-              ></span>
-              <span
-                className="w-8 h-8 bg-yellow-300 rounded-full border-3 border-white shadow-lg animate-bounce"
+                className="text-3xl animate-bounce"
                 style={{ animationDelay: "0.2s" }}
-              ></span>
+              >
+                💤
+              </span>
               <span
-                className="w-8 h-8 bg-green-500 rounded-full border-3 border-white shadow-lg animate-bounce"
-                style={{ animationDelay: "0.3s" }}
-              ></span>
-              <span
-                className="w-8 h-8 bg-purple-500 rounded-full border-3 border-white shadow-lg animate-bounce"
+                className="text-3xl animate-bounce"
                 style={{ animationDelay: "0.4s" }}
-              ></span>
+              >
+                ✨
+              </span>
               <span
-                className="w-8 h-8 bg-orange-500 rounded-full border-3 border-white shadow-lg animate-bounce"
-                style={{ animationDelay: "0.5s" }}
-              ></span>
+                className="text-3xl animate-bounce"
+                style={{ animationDelay: "0.6s" }}
+              >
+                🌙
+              </span>
             </div>
             <p className="text-sm font-semibold text-center">
-              Her tuval siparişinizle birlikte!
+              Rahatlatıcı ninni melodileri ve yumuşak ışık!
             </p>
           </div>
 
           <div className="bg-gradient-to-r from-purple-100 to-pink-100 p-6 rounded-2xl shadow-lg border-2 border-purple-300">
             <p className="text-lg font-semibold text-gray-800 mb-3">
-              🌈 Hayal gücünü özgürce ifade etsin!
+              🌙 Huzurlu uykular için mükemmel arkadaş!
             </p>
             <p className="text-sm text-gray-600">
-              Özel olarak çocuklar için tasarlanmış, kaliteli tuvallerle sanatın
-              keyfini çıkarsın
+              Yumuşacık peluş, rahatlatıcı sesler ve yumuşak ışıkla çocuğunuz
+              güvenle uyuyacak
             </p>
           </div>
 
           <button
-            onClick={() => navigate("/tuval")}
+            onClick={() => navigate("/ayicik")}
             className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white font-bold py-5 px-8 rounded-2xl text-xl shadow-2xl transform transition hover:scale-105 active:scale-95 animate-pulse"
           >
-            🎁 Hemen Sipariş Ver 🖌️
+            🧸 Hemen Sipariş Ver 🌙
           </button>
 
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-white p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-pink-200">
-              <div className="text-4xl mb-2 animate-bounce">🎨</div>
-              <p className="text-xs font-bold text-gray-800">Premium Kalite</p>
-              <p className="text-xs text-gray-600 mt-1">Profesyonel tuval</p>
+              <div className="text-4xl mb-2 animate-bounce">🎵</div>
+              <p className="text-xs font-bold text-gray-800">Sesli Özellik</p>
+              <p className="text-xs text-gray-600 mt-1">Ninni melodileri</p>
             </div>
             <div className="bg-white p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-purple-200">
               <div
                 className="text-4xl mb-2 animate-bounce"
                 style={{ animationDelay: "0.1s" }}
               >
-                👶
+                💡
               </div>
-              <p className="text-xs font-bold text-gray-800">Çocuk Dostu</p>
-              <p className="text-xs text-gray-600 mt-1">Güvenli malzeme</p>
+              <p className="text-xs font-bold text-gray-800">Işıklı Özellik</p>
+              <p className="text-xs text-gray-600 mt-1">Yumuşak ışık</p>
             </div>
             <div className="bg-white p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-blue-200">
               <div
                 className="text-4xl mb-2 animate-bounce"
                 style={{ animationDelay: "0.2s" }}
               >
-                🚚
+                🧸
               </div>
-              <p className="text-xs font-bold text-gray-800">Hızlı Kargo</p>
-              <p className="text-xs text-gray-600 mt-1">2-3 gün teslimat</p>
+              <p className="text-xs font-bold text-gray-800">Yumuşacık Peluş</p>
+              <p className="text-xs text-gray-600 mt-1">Premium kalite</p>
             </div>
             <div className="bg-white p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-green-200">
               <div
                 className="text-4xl mb-2 animate-bounce"
                 style={{ animationDelay: "0.3s" }}
               >
-                🎁
+                🚚
               </div>
-              <p className="text-xs font-bold text-gray-800">6 Renk Boya</p>
-              <p className="text-xs text-gray-600 mt-1">Hediye!</p>
+              <p className="text-xs font-bold text-gray-800">Hızlı Kargo</p>
+              <p className="text-xs text-gray-600 mt-1">2-3 gün teslimat</p>
             </div>
           </div>
 
@@ -139,8 +139,8 @@ function HomePage() {
             <div className="space-y-3">
               <div className="bg-white rounded-lg p-3 shadow-sm">
                 <p className="text-xs text-gray-700 italic mb-2">
-                  "Oğlum ilk tuvalini görünce çok heyecanlandı! Boyalarla
-                  saatlerce oynuyor 🎨"
+                  "Kızım ayıcığıyla çok daha rahat uyuyor. Ninni sesleri harika!
+                  🌙"
                 </p>
                 <p className="text-xs text-gray-500 font-semibold">
                   - Ayşe H., İstanbul
@@ -148,8 +148,8 @@ function HomePage() {
               </div>
               <div className="bg-white rounded-lg p-3 shadow-sm">
                 <p className="text-xs text-gray-700 italic mb-2">
-                  "Kızımın yaratıcılığı inanılmaz gelişti. Her gün yeni bir şey
-                  çiziyor! 🌈"
+                  "Oğlum artık tek başına uyuyor. Ayıcık onu çok rahatlatmış!
+                  🧸"
                 </p>
                 <p className="text-xs text-gray-500 font-semibold">
                   - Mehmet K., Ankara

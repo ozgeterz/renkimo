@@ -1,15 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { citiesAndDistricts } from "../data/citiesAndDistricts";
-import tuval1 from "../assets/tuval1.webp";
-import tuval2 from "../assets/tuval2.webp";
-import tuval3 from "../assets/tuval3.webp";
+import st1 from "../assets/st1.webp";
+import st2 from "../assets/st2.webp";
+import st3 from "../assets/st3.webp";
 const cities = Object.keys(citiesAndDistricts);
 
 const products = [
-  { quantity: 1, price: 499, shipping: 50, freeShipping: false },
-  { quantity: 2, price: 799, shipping: 0, freeShipping: true },
-  { quantity: 3, price: 1000, shipping: 0, freeShipping: true },
+  { quantity: 1, price: 1499, shipping: 0, freeShipping: true },
+  { quantity: 2, price: 2500, shipping: 0, freeShipping: true },
 ];
 
 function ProductPage() {
@@ -21,11 +20,11 @@ function ProductPage() {
     city: "",
     district: "",
     address: "",
-    canvasQuantity: "1",
+    bearQuantity: "1",
     paymentMethod: "cash",
   });
   const [districts, setDistricts] = useState([]);
-  const productImages = [tuval1, tuval2, tuval3];
+  const productImages = [st1, st2, st3];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -73,17 +72,13 @@ function ProductPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formId = import.meta.env.VITE_GOOGLE_FORM_ID_TUVAL;
+    const formId = import.meta.env.VITE_GOOGLE_FORM_ID_AYI;
     if (!formId) return;
     console.log(formId);
     const baseUrl = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
 
-    const canvasQuantityText =
-      formData.canvasQuantity === "1"
-        ? "1 ADET  TUVAL"
-        : formData.canvasQuantity === "2"
-        ? "2 ADET TUVAL"
-        : "3 ADET TUVAL";
+    const bearQuantityText =
+      formData.bearQuantity === "1" ? "1 ADET AYICIK" : "2 ADET AYICIK";
 
     const paymentMethodText =
       formData.paymentMethod === "cash" ? "Kapıda Nakit" : "Kapıda Kart";
@@ -94,7 +89,7 @@ function ProductPage() {
       "entry.771023585": formData.city,
       "entry.1526543336": formData.district,
       "entry.1955750203": formData.address,
-      "entry.1839909422": canvasQuantityText,
+      "entry.1839909422": bearQuantityText,
       "entry.457560409": paymentMethodText,
     });
 
@@ -112,7 +107,7 @@ function ProductPage() {
   };
 
   const selectedProduct = products.find(
-    (p) => p.quantity === parseInt(formData.canvasQuantity)
+    (p) => p.quantity === parseInt(formData.bearQuantity)
   );
   const total = selectedProduct
     ? selectedProduct.price + selectedProduct.shipping
@@ -141,10 +136,10 @@ function ProductPage() {
               </p>
             </div>
             <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent mb-2">
-              🎨 Renkimo Tuval
+              🧸 Uyku Arkadaşı Ayıcık
             </h1>
             <p className="text-center text-gray-700 font-semibold mb-2">
-              Çocuğunuzun İlk Sanat Eseri İçin
+              Sesli ve Işıklı - Huzurlu Uykular İçin
             </p>
             <div className="flex items-center justify-center gap-2 mb-3">
               <span className="text-yellow-500">⭐⭐⭐⭐⭐</span>
@@ -154,7 +149,7 @@ function ProductPage() {
             </div>
             <div className="bg-gradient-to-r from-green-400 to-emerald-400 text-white text-center py-2 px-4 rounded-lg mb-4 shadow-md">
               <p className="text-sm font-bold">
-                🎨 HER SİPARİŞE 6 RENK BOYA HEDİYE! 🎁
+                💤 SESLİ VE IŞIKLI - RAHAT UYKU! ✨
               </p>
             </div>
           </div>
@@ -164,63 +159,59 @@ function ProductPage() {
               <img
                 key={index}
                 src={img}
-                alt={`Tuval Görsel ${index + 1}`}
+                alt={`Ayıcık Görsel ${index + 1}`}
                 className="w-full block h-auto"
               />
             ))}
           </div>
 
           <div className="bg-gradient-to-r from-purple-100 to-pink-100 p-6 mt-0 border-t-4 border-purple-400">
-            <div className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-xl p-4 mb-4 shadow-lg">
+            <div className="bg-gradient-to-r from-blue-400 to-purple-400 text-white rounded-xl p-4 mb-4 shadow-lg">
               <div className="flex items-center justify-center gap-2 mb-2">
-                <span className="text-3xl">🎨</span>
-                <h3 className="font-bold text-lg">HEDİYE: 6 RENK BOYA SETİ!</h3>
-                <span className="text-3xl">🎨</span>
+                <span className="text-3xl">🎵</span>
+                <h3 className="font-bold text-lg">SESLİ VE IŞIKLI ÖZELLIK!</h3>
+                <span className="text-3xl">💡</span>
               </div>
-              <div className="flex justify-center gap-2 mb-2">
-                <span className="w-6 h-6 bg-red-500 rounded-full border-2 border-white shadow-md"></span>
-                <span className="w-6 h-6 bg-blue-500 rounded-full border-2 border-white shadow-md"></span>
-                <span className="w-6 h-6 bg-yellow-300 rounded-full border-2 border-white shadow-md"></span>
-                <span className="w-6 h-6 bg-green-500 rounded-full border-2 border-white shadow-md"></span>
-                <span className="w-6 h-6 bg-purple-500 rounded-full border-2 border-white shadow-md"></span>
-                <span className="w-6 h-6 bg-orange-500 rounded-full border-2 border-white shadow-md"></span>
+              <div className="flex justify-center gap-3 mb-2">
+                <span className="text-2xl">🎶</span>
+                <span className="text-2xl">💤</span>
+                <span className="text-2xl">✨</span>
+                <span className="text-2xl">🌙</span>
               </div>
               <p className="text-center text-sm font-semibold">
-                Her tuval siparişinizle birlikte 6 renkli boya seti HEDİYE!
+                Rahatlatıcı sesler ve yumuşak ışıkla huzurlu uykular!
               </p>
             </div>
 
             <h3 className="font-bold text-gray-800 mb-4 text-lg flex items-center gap-2">
-              <span className="text-2xl">✨</span> Neden Renkimo?
+              <span className="text-2xl">✨</span> Neden Uyku Arkadaşı Ayıcık?
             </h3>
             <ul className="text-sm text-gray-700 space-y-3">
               <li className="flex items-start gap-2">
                 <span className="text-green-500 font-bold text-lg">✓</span>
                 <span>
-                  <strong>Çocuklar için ideal boyut</strong> - Küçük ellere özel
-                  tasarım
+                  <strong>Sesli ve ışıklı özellik</strong> - Rahatlatıcı ninni
+                  melodileri ve yumuşak ışık
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-green-500 font-bold text-lg">✓</span>
                 <span>
-                  <strong>Premium kalite tuval</strong> - Profesyonel
-                  sanatçıların tercihi
-                </span>
-              </li>
-
-              <li className="flex items-start gap-2">
-                <span className="text-green-500 font-bold text-lg">✓</span>
-                <span>
-                  <strong>6 renkli boya seti hediye</strong> - Hemen çizmeye
-                  başlasın!
+                  <strong>Yumuşacık peluş</strong> - Premium kalite,
+                  hipoalerjenik kumaş
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-green-500 font-bold text-lg">✓</span>
                 <span>
-                  <strong>Tüm boya türleri</strong> - Sulu, akrilik, yağlı boya
-                  uyumlu
+                  <strong>Güvenli ve dayanıklı</strong> - CE sertifikalı,
+                  yıkanabilir
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-500 font-bold text-lg">✓</span>
+                <span>
+                  <strong>Huzurlu uyku</strong> - Çocuğunuzun en iyi arkadaşı
                 </span>
               </li>
             </ul>
@@ -229,8 +220,8 @@ function ProductPage() {
                 🎁 Çocuğunuza en güzel hediye!
               </p>
               <p className="text-xs text-gray-700 text-center">
-                Hayal gücünü geliştirin, yaratıcılığını destekleyin, mutluluğunu
-                izleyin! 🌈
+                Rahat uyku, mutlu sabahlar! Sevimli arkadaşıyla huzurlu geceler
+                🌙
               </p>
             </div>
           </div>
@@ -379,7 +370,7 @@ function ProductPage() {
                   <label
                     key={product.quantity}
                     className={`cursor-pointer border-2 rounded-lg p-4 flex items-center justify-between transition relative ${
-                      formData.canvasQuantity === product.quantity.toString()
+                      formData.bearQuantity === product.quantity.toString()
                         ? "border-purple-500 bg-purple-50 shadow-lg"
                         : "border-gray-300 hover:border-purple-300 hover:shadow-md"
                     }`}
@@ -389,26 +380,20 @@ function ProductPage() {
                         🔥 EN ÇOK TERCİH EDİLEN
                       </div>
                     )}
-                    {index === 2 && (
-                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-gray-800 text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                        💰 EN AVANTAJLI
-                      </div>
-                    )}
                     <div className="flex items-center gap-3">
                       <input
                         type="radio"
-                        name="canvasQuantity"
+                        name="bearQuantity"
                         value={product.quantity.toString()}
                         checked={
-                          formData.canvasQuantity ===
-                          product.quantity.toString()
+                          formData.bearQuantity === product.quantity.toString()
                         }
                         onChange={handleChange}
                         className="w-5 h-5 text-purple-500"
                       />
                       <div>
                         <div className="font-bold text-gray-800 text-lg">
-                          {product.quantity} Adet TUVAL
+                          {product.quantity} Adet AYICIK
                         </div>
                         <div className="text-purple-600 font-bold text-xl">
                           {product.price} TL
@@ -478,7 +463,7 @@ function ProductPage() {
             <div className="bg-gray-50 rounded-lg p-4 space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">
-                  Tuval ({formData.canvasQuantity} adet)
+                  Ayıcık ({formData.bearQuantity} adet)
                 </span>
                 <span className="font-semibold">
                   {selectedProduct?.price} TL
