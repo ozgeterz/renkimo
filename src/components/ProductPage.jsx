@@ -121,7 +121,7 @@ function ProductPage() {
     if (formRef.current) {
       const elementPosition = formRef.current.getBoundingClientRect().top;
       const offsetPosition =
-        elementPosition + window.pageYOffset - window.innerHeight / 2 + 270;
+        elementPosition + window.pageYOffset - window.innerHeight / 2 + 290;
 
       window.scrollTo({
         top: offsetPosition,
