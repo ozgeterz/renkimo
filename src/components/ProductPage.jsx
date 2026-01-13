@@ -99,6 +99,13 @@ function ProductPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Ürün seçimi kontrolü
+    if (formData.selectedProducts.length === 0) {
+      alert("⚠️ Lütfen en az bir ürün seçiniz!");
+      return;
+    }
+
     const formId = import.meta.env.VITE_GOOGLE_FORM_ID_AYI;
     if (!formId) return;
     console.log(formId);
@@ -520,6 +527,70 @@ function ProductPage() {
                 </div>
               </div>
             )}
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Ödeme Yöntemi <span className="text-red-500">*</span>
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                <label
+                  className={`cursor-pointer border-2 rounded-xl p-4 transition-all ${
+                    formData.paymentMethod === "cash"
+                      ? "border-purple-500 bg-purple-50 ring-2 ring-purple-200"
+                      : "border-gray-300 hover:border-purple-300"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="cash"
+                    checked={formData.paymentMethod === "cash"}
+                    onChange={handleChange}
+                    className="hidden"
+                  />
+                  <div className="text-center">
+                    <div className="text-3xl mb-2">💵</div>
+                    <p
+                      className={`font-bold text-sm ${
+                        formData.paymentMethod === "cash"
+                          ? "text-purple-700"
+                          : "text-gray-700"
+                      }`}
+                    >
+                      Kapıda Nakit
+                    </p>
+                  </div>
+                </label>
+                <label
+                  className={`cursor-pointer border-2 rounded-xl p-4 transition-all ${
+                    formData.paymentMethod === "card"
+                      ? "border-purple-500 bg-purple-50 ring-2 ring-purple-200"
+                      : "border-gray-300 hover:border-purple-300"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="card"
+                    checked={formData.paymentMethod === "card"}
+                    onChange={handleChange}
+                    className="hidden"
+                  />
+                  <div className="text-center">
+                    <div className="text-3xl mb-2">💳</div>
+                    <p
+                      className={`font-bold text-sm ${
+                        formData.paymentMethod === "card"
+                          ? "text-purple-700"
+                          : "text-gray-700"
+                      }`}
+                    >
+                      Kapıda Kart
+                    </p>
+                  </div>
+                </label>
+              </div>
+            </div>
 
             <button
               type="submit"
