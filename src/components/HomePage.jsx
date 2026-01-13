@@ -125,10 +125,10 @@ function HomePage() {
                 className="text-4xl mb-2 animate-bounce"
                 style={{ animationDelay: "0.3s" }}
               >
-                🚚
+                🚀
               </div>
-              <p className="text-xs font-bold text-gray-800">Hızlı Kargo</p>
-              <p className="text-xs text-gray-600 mt-1">2-3 gün teslimat</p>
+              <p className="text-xs font-bold text-gray-800">Aynı Gün Kargo</p>
+              <p className="text-xs text-gray-600 mt-1">Hızlı teslimat</p>
             </div>
           </div>
 

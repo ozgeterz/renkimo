@@ -28,7 +28,7 @@ function ThankYou() {
         </p>
         <div className="bg-white rounded-xl p-6 shadow-lg">
           <p className="text-sm text-gray-600">
-            📦 Siparişiniz 2-3 iş günü içinde kargoya verilecektir.
+            🚀 Siparişiniz aynı gün kargoya verilecektir!
           </p>
         </div>
       </div>

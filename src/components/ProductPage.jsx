@@ -92,9 +92,6 @@ function ProductPage() {
     const bearQuantityText =
       formData.bearQuantity === "1" ? "1 ADET AYICIK" : "2 ADET AYICIK";
 
-    const paymentMethodText =
-      formData.paymentMethod === "cash" ? "Kapıda Nakit" : "Kapıda Kart";
-
     const body = new URLSearchParams({
       "entry.2043686489": formData.fullName,
       "entry.2028768623": formData.phone,
@@ -102,7 +99,7 @@ function ProductPage() {
       "entry.1526543336": formData.district,
       "entry.1955750203": formData.address,
       "entry.1839909422": bearQuantityText,
-      "entry.457560409": paymentMethodText,
+      "entry.457560409": "Kapıda Ödeme",
     });
 
     fetch(baseUrl, {
@@ -159,9 +156,9 @@ function ProductPage() {
                 (500+ Mutlu Aile)
               </span>
             </div>
-            <div className="bg-gradient-to-r from-green-400 to-emerald-400 text-white text-center py-2 px-4 rounded-lg mb-4 shadow-md">
+            <div className="bg-gradient-to-r from-orange-400 to-red-400 text-white text-center py-2 px-4 rounded-lg mb-4 shadow-md animate-pulse">
               <p className="text-sm font-bold">
-                💤 SESLİ VE IŞIKLI - RAHAT UYKU! ✨
+                � AYNI GÜN KARGOYA VERİLİR! ⚡
               </p>
             </div>
           </div>
@@ -433,47 +430,41 @@ function ProductPage() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Ödeme Yöntemi
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                <label
-                  className={`cursor-pointer border-2 rounded-lg p-4 text-center transition ${
-                    formData.paymentMethod === "cash"
-                      ? "border-purple-500 bg-purple-50"
-                      : "border-gray-300 hover:border-purple-300"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="cash"
-                    checked={formData.paymentMethod === "cash"}
-                    onChange={handleChange}
-                    className="hidden"
-                  />
-                  <div className="text-2xl mb-1">💵</div>
-                  <div className="text-sm font-semibold">Kapıda Nakit</div>
-                </label>
-                <label
-                  className={`cursor-pointer border-2 rounded-lg p-4 text-center transition ${
-                    formData.paymentMethod === "card"
-                      ? "border-purple-500 bg-purple-50"
-                      : "border-gray-300 hover:border-purple-300"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="card"
-                    checked={formData.paymentMethod === "card"}
-                    onChange={handleChange}
-                    className="hidden"
-                  />
-                  <div className="text-2xl mb-1">💳</div>
-                  <div className="text-sm font-semibold">Kapıda Kart</div>
-                </label>
+            <div className="space-y-3">
+              <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-400 rounded-xl p-4 shadow-md">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <span className="text-2xl">💰</span>
+                  <h3 className="font-bold text-green-800 text-base">
+                    KAPIDA ÖDEME
+                  </h3>
+                  <span className="text-2xl">✅</span>
+                </div>
+                <p className="text-center text-gray-700 text-xs mb-2">
+                  <strong>Ödeme kapıda yapılır!</strong> Ürünü teslim alırken
+                  nakit veya kartla ödeyebilirsiniz.
+                </p>
+                <div className="flex items-center justify-center gap-4 text-xs text-gray-600">
+                  <span className="flex items-center gap-1">
+                    <span className="text-base">💵</span> Nakit
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <span className="text-base">💳</span> Kart
+                  </span>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-orange-50 to-red-50 border-2 border-orange-400 rounded-xl p-4 shadow-md">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <span className="text-2xl">�</span>
+                  <h3 className="font-bold text-orange-800 text-base">
+                    AYNI GÜN KARGO
+                  </h3>
+                  <span className="text-2xl">⚡</span>
+                </div>
+                <p className="text-center text-gray-700 text-xs">
+                  <strong>Siparişiniz aynı gün kargoya verilir!</strong> Hızlı
+                  teslimat garantisi.
+                </p>
               </div>
             </div>
 
