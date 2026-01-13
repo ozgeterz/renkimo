@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import st3 from "../assets/st3.webp";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -20,8 +21,8 @@ function HomePage() {
           }`}
         >
           <div className="relative">
-            <h1 className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-pulse">
-              🧸 Renkimo
+            <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">
+              Renkimo
             </h1>
           </div>
           <p className="text-2xl font-bold text-gray-800">
@@ -31,50 +32,37 @@ function HomePage() {
             "Huzurlu uykular, mutlu sabahlar - Sevimli arkadaşıyla güvenli
             geceler"
           </p>
-        </div>
 
+          <div className="rounded-2xl overflow-hidden shadow-2xl border-4 border-purple-300">
+            <img
+              src={st3}
+              alt="Uyku Arkadaşı Ayıcık"
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+        <button
+          onClick={() => navigate("/ayicik")}
+          className="w-full bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 text-white font-bold py-6 px-8 rounded-2xl text-2xl shadow-2xl transform transition hover:scale-110 active:scale-95 animate-pulse border-4 border-white"
+          style={{ animationDuration: "1.5s" }}
+        >
+          <div className="flex items-center justify-center gap-3">
+            <span className="text-3xl">🛒</span>
+            <span>HEMEN SİPARİŞ VER</span>
+            <span className="text-3xl">🎁</span>
+          </div>
+        </button>
         <div
           className={`space-y-6 transition-all duration-1000 delay-300 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <div className="bg-gradient-to-r from-blue-400 to-purple-400 text-white p-5 rounded-2xl shadow-2xl border-4 border-blue-300 animate-pulse">
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <span className="text-3xl">🎵</span>
-              <p className="text-lg font-bold text-center">
-                SESLİ VE IŞIKLI ÖZELLİK!
-              </p>
-              <span className="text-3xl">💡</span>
+          <div className="bg-gradient-to-r from-orange-100 to-red-100 p-4 rounded-xl shadow-lg border-2 border-orange-300">
+            <div className="flex items-center justify-center gap-2 text-orange-800 font-bold">
+              <span className="text-2xl">⚡</span>
+              <p className="text-sm">ÖZEL KAMPANYA - SINIRLI STOK!</p>
+              <span className="text-2xl">⚡</span>
             </div>
-            <div className="flex justify-center gap-3 mb-3">
-              <span
-                className="text-3xl animate-bounce"
-                style={{ animationDelay: "0s" }}
-              >
-                🎶
-              </span>
-              <span
-                className="text-3xl animate-bounce"
-                style={{ animationDelay: "0.2s" }}
-              >
-                💤
-              </span>
-              <span
-                className="text-3xl animate-bounce"
-                style={{ animationDelay: "0.4s" }}
-              >
-                ✨
-              </span>
-              <span
-                className="text-3xl animate-bounce"
-                style={{ animationDelay: "0.6s" }}
-              >
-                🌙
-              </span>
-            </div>
-            <p className="text-sm font-semibold text-center">
-              Rahatlatıcı ninni melodileri ve yumuşak ışık!
-            </p>
           </div>
 
           <div className="bg-gradient-to-r from-purple-100 to-pink-100 p-6 rounded-2xl shadow-lg border-2 border-purple-300">
@@ -86,13 +74,6 @@ function HomePage() {
               güvenle uyuyacak
             </p>
           </div>
-
-          <button
-            onClick={() => navigate("/ayicik")}
-            className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white font-bold py-5 px-8 rounded-2xl text-xl shadow-2xl transform transition hover:scale-105 active:scale-95 animate-pulse"
-          >
-            🧸 Hemen Sipariş Ver 🌙
-          </button>
 
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-white p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-pink-200">
