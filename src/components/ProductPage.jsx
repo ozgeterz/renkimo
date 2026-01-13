@@ -4,24 +4,27 @@ import { citiesAndDistricts } from "../data/citiesAndDistricts";
 import st1 from "../assets/st1.webp";
 import st2 from "../assets/st2.webp";
 import st3 from "../assets/st3.webp";
+import gm2 from "../assets/gm2.webp";
+import gm3 from "../assets/gm3.webp";
+import gm4 from "../assets/gm4.webp";
 const cities = Object.keys(citiesAndDistricts);
 
-const products = [
-  {
-    quantity: 1,
-    price: 1499,
-    originalPrice: 1999,
-    shipping: 0,
-    freeShipping: true,
-  },
-  {
-    quantity: 2,
-    price: 2500,
-    originalPrice: 3500,
-    shipping: 0,
-    freeShipping: true,
-  },
+const productVariants = [
+  { id: "blue-stitch", name: "Mavi Stitch", image: gm3 },
+  { id: "pink-bear", name: "Pembe Ayıcık", image: gm2 },
+  { id: "pink-stitch", name: "Pembe Stitch", image: gm4 },
 ];
+
+const getTotalPrice = (productCount) => {
+  if (productCount === 1) return 1499;
+  if (productCount === 2) return 2499;
+  if (productCount === 3) return 3299;
+  return productCount * 1499; // Fallback for more than 3
+};
+
+const getOriginalTotalPrice = (productCount) => {
+  return productCount * 1999; // Original price per product
+};
 
 function ProductPage() {
   const navigate = useNavigate();
@@ -32,8 +35,8 @@ function ProductPage() {
     city: "",
     district: "",
     address: "",
-    bearQuantity: "1",
     paymentMethod: "cash",
+    selectedProducts: [],
   });
   const [districts, setDistricts] = useState([]);
   const productImages = [st1, st2, st3];
@@ -70,13 +73,25 @@ function ProductPage() {
     }
   };
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     if (name === "city") {
       setFormData((prev) => ({ ...prev, [name]: value, district: "" }));
       setDistricts(citiesAndDistricts[value] || []);
     } else if (name === "phone") {
       const formatted = formatPhoneNumber(value);
       setFormData((prev) => ({ ...prev, [name]: formatted }));
+    } else if (name === "productVariant") {
+      setFormData((prev) => {
+        let newSelected = [...prev.selectedProducts];
+        if (checked) {
+          if (!newSelected.includes(value)) {
+            newSelected.push(value);
+          }
+        } else {
+          newSelected = newSelected.filter((id) => id !== value);
+        }
+        return { ...prev, selectedProducts: newSelected };
+      });
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
@@ -89,8 +104,10 @@ function ProductPage() {
     console.log(formId);
     const baseUrl = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
 
-    const bearQuantityText =
-      formData.bearQuantity === "1" ? "1 ADET AYICIK" : "2 ADET AYICIK";
+    const selectedProductNames = formData.selectedProducts
+      .map((id) => productVariants.find((v) => v.id === id)?.name)
+      .filter(Boolean)
+      .join(" + ");
 
     const paymentMethodText =
       formData.paymentMethod === "cash" ? "Kapıda Nakit" : "Kapıda Kart";
@@ -101,7 +118,7 @@ function ProductPage() {
       "entry.771023585": formData.city,
       "entry.1526543336": formData.district,
       "entry.1955750203": formData.address,
-      "entry.1839909422": bearQuantityText,
+      "entry.1839909422": `${selectedProductNames}`,
       "entry.457560409": paymentMethodText,
     });
 
@@ -118,12 +135,10 @@ function ProductPage() {
     navigate("/tesekkurler");
   };
 
-  const selectedProduct = products.find(
-    (p) => p.quantity === parseInt(formData.bearQuantity)
+  const totalPrice = getTotalPrice(formData.selectedProducts.length);
+  const totalOriginalPrice = getOriginalTotalPrice(
+    formData.selectedProducts.length
   );
-  const total = selectedProduct
-    ? selectedProduct.price + selectedProduct.shipping
-    : 0;
   const handlePageClick = () => {
     if (formRef.current) {
       const elementPosition = formRef.current.getBoundingClientRect().top;
@@ -375,146 +390,136 @@ function ProductPage() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Adet Seçimi <span className="text-red-500">*</span>
+                Ürün Seçimi <span className="text-red-500">*</span>
               </label>
-              <div className="space-y-3">
-                {products.map((product, index) => (
+              <div className="grid grid-cols-3 gap-3">
+                {productVariants.map((variant) => (
                   <label
-                    key={product.quantity}
-                    className={`cursor-pointer border-2 rounded-lg p-4 flex items-center justify-between transition relative ${
-                      formData.bearQuantity === product.quantity.toString()
-                        ? "border-purple-500 bg-purple-50 shadow-lg"
-                        : "border-gray-300 hover:border-purple-300 hover:shadow-md"
+                    key={variant.id}
+                    className={`cursor-pointer border-3 rounded-xl overflow-hidden transition-all ${
+                      formData.selectedProducts.includes(variant.id)
+                        ? "border-purple-500 ring-4 ring-purple-200 shadow-xl scale-105"
+                        : "border-gray-300 hover:border-purple-300 hover:shadow-lg"
                     }`}
                   >
-                    {index === 1 && (
-                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                        🔥 EN ÇOK TERCİH EDİLEN
-                      </div>
-                    )}
-                    <div className="flex items-center gap-3">
-                      <input
-                        type="radio"
-                        name="bearQuantity"
-                        value={product.quantity.toString()}
-                        checked={
-                          formData.bearQuantity === product.quantity.toString()
-                        }
-                        onChange={handleChange}
-                        className="w-5 h-5 text-purple-500"
+                    <input
+                      type="checkbox"
+                      name="productVariant"
+                      value={variant.id}
+                      checked={formData.selectedProducts.includes(variant.id)}
+                      onChange={handleChange}
+                      className="hidden"
+                    />
+                    <div className="relative">
+                      <img
+                        src={variant.image}
+                        alt={variant.name}
+                        className="w-full h-24 object-cover"
                       />
-                      <div>
-                        <div className="font-semibold text-gray-800 text-base">
-                          {product.quantity} Adet AYICIK
+                      {formData.selectedProducts.includes(variant.id) && (
+                        <div className="absolute top-1 right-1 bg-purple-500 text-white rounded-full p-1">
+                          <svg
+                            className="w-4 h-4"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
                         </div>
-                        <div className="flex items-center gap-2 mt-1">
-                          <span className="text-gray-400 line-through text-sm">
-                            {product.originalPrice} TL
-                          </span>
-                          <span className="text-purple-600 font-bold text-lg">
-                            {product.price} TL
-                          </span>
-                        </div>
-                      </div>
+                      )}
                     </div>
-                    <div className="text-right">
-                      <div className="bg-red-100 text-red-600 font-bold text-xs px-2 py-1 rounded">
-                        %
-                        {Math.round(
-                          ((product.originalPrice - product.price) /
-                            product.originalPrice) *
-                            100
-                        )}{" "}
-                        İNDİRİM
-                      </div>
+                    <div
+                      className={`p-2 text-center ${
+                        formData.selectedProducts.includes(variant.id)
+                          ? "bg-purple-50 font-bold text-purple-700"
+                          : "bg-white text-gray-700"
+                      }`}
+                    >
+                      <p className="text-xs">{variant.name}</p>
                     </div>
                   </label>
                 ))}
               </div>
             </div>
 
-            <div className="space-y-3">
-              <div className="bg-gradient-to-r from-orange-50 to-red-50 border-2 border-orange-400 rounded-xl p-4 shadow-md">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <span className="text-2xl">�</span>
-                  <h3 className="font-bold text-orange-800 text-base">
-                    AYNI GÜN KARGO
-                  </h3>
-                  <span className="text-2xl">⚡</span>
+            {formData.selectedProducts.length > 0 && (
+              <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-purple-200 shadow-lg">
+                <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                  🛒 Sepetiniz
+                </h3>
+
+                <div className="space-y-3 mb-4">
+                  {formData.selectedProducts.map((productId) => {
+                    const variant = productVariants.find(
+                      (v) => v.id === productId
+                    );
+                    return (
+                      <div
+                        key={productId}
+                        className="bg-white rounded-xl p-4 flex items-center justify-between shadow-md hover:shadow-lg transition-all"
+                      >
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={variant?.image}
+                            alt={variant?.name}
+                            className="w-16 h-16 rounded-lg object-cover border-2 border-purple-200"
+                          />
+                          <div>
+                            <p className="font-bold text-gray-800">
+                              {variant?.name}
+                            </p>
+                            <p className="text-xs text-gray-500">1 Adet</p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-green-600 text-sm font-semibold">
+                            ✓ Seçildi
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
-                <p className="text-center text-gray-700 text-xs">
-                  <strong>Siparişiniz aynı gün kargoya verilir!</strong> Hızlı
-                  teslimat garantisi.
-                </p>
-              </div>
-            </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Ödeme Yöntemi <span className="text-red-500">*</span>
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                <label
-                  className={`cursor-pointer border-2 rounded-lg p-4 text-center transition ${
-                    formData.paymentMethod === "cash"
-                      ? "border-green-500 bg-green-50"
-                      : "border-gray-300 hover:border-green-300"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="cash"
-                    checked={formData.paymentMethod === "cash"}
-                    onChange={handleChange}
-                    className="hidden"
-                  />
-                  <div className="text-3xl mb-1">💵</div>
-                  <div className="text-sm font-semibold">Kapıda Nakit</div>
-                </label>
-                <label
-                  className={`cursor-pointer border-2 rounded-lg p-4 text-center transition ${
-                    formData.paymentMethod === "card"
-                      ? "border-green-500 bg-green-50"
-                      : "border-gray-300 hover:border-green-300"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="card"
-                    checked={formData.paymentMethod === "card"}
-                    onChange={handleChange}
-                    className="hidden"
-                  />
-                  <div className="text-3xl mb-1">💳</div>
-                  <div className="text-sm font-semibold">Kapıda Kart</div>
-                </label>
+                <div className="bg-white rounded-xl p-4 space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">
+                      Ara Toplam ({formData.selectedProducts.length} ürün)
+                    </span>
+                    <span className="font-semibold">{totalPrice} TL</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Kargo</span>
+                    <span className="font-bold text-green-600">
+                      ÜCRETSİZ 🎁
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-sm text-red-500">
+                    <span>İndirim</span>
+                    <span className="font-semibold">
+                      -{totalOriginalPrice - totalPrice} TL
+                    </span>
+                  </div>
+                  <div className="border-t-2 border-purple-200 pt-3 flex justify-between items-center">
+                    <span className="font-bold text-lg text-gray-800">
+                      Toplam
+                    </span>
+                    <div className="text-right">
+                      <p className="text-sm text-gray-400 line-through">
+                        {totalOriginalPrice} TL
+                      </p>
+                      <p className="font-bold text-2xl text-purple-600">
+                        {totalPrice} TL
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-600">
-                  Ayıcık ({formData.bearQuantity} adet)
-                </span>
-                <span className="font-semibold">
-                  {selectedProduct?.price} TL
-                </span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-600">Kargo</span>
-                <span className="font-bold text-green-600 flex items-center gap-1">
-                  ÜCRETSİZ 🎁
-                </span>
-              </div>
-              <div className="border-t pt-2 flex justify-between items-center">
-                <span className="font-bold text-base">Toplam</span>
-                <span className="font-bold text-xl text-purple-600">
-                  {total} TL
-                </span>
-              </div>
-            </div>
+            )}
 
             <button
               type="submit"
