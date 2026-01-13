@@ -1,10 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { citiesAndDistricts } from "../data/citiesAndDistricts";
 import tuval1 from "../assets/tuval1.webp";
 import tuval2 from "../assets/tuval2.webp";
 import tuval3 from "../assets/tuval3.webp";
-import tuval4 from "../assets/tuval4.webp";
 const cities = Object.keys(citiesAndDistricts);
 
 const products = [
@@ -26,7 +25,11 @@ function ProductPage() {
     paymentMethod: "cash",
   });
   const [districts, setDistricts] = useState([]);
-  const productImages = [tuval1, tuval2, tuval3, tuval4];
+  const productImages = [tuval1, tuval2, tuval3];
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const formatPhoneNumber = (value) => {
     let cleaned = value.replace(/\D/g, "");
 
@@ -208,12 +211,7 @@ function ProductPage() {
                   sanatçıların tercihi
                 </span>
               </li>
-              <li className="flex items-start gap-2">
-                <span className="text-green-500 font-bold text-lg">✓</span>
-                <span>
-                  <strong>Dayanıklı ahşap çerçeve</strong> - Yıllarca kullanım
-                </span>
-              </li>
+
               <li className="flex items-start gap-2">
                 <span className="text-green-500 font-bold text-lg">✓</span>
                 <span>
