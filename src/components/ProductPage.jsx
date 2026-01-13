@@ -129,18 +129,34 @@ function ProductPage() {
 
   return (
     <div
-      className="min-h-screen bg-white w-full max-w-[390px] mx-auto"
+      className="min-h-screen bg-gradient-to-b from-purple-50 to-pink-50 w-full max-w-[390px] mx-auto"
       onClick={handlePageClick}
     >
       <div className="max-w-md ">
-        <div className="bg-white">
+        <div className="bg-white shadow-xl">
           <div className="p-6 pb-0">
-            <h1 className="text-3xl font-bold text-center text-primary mb-2">
+            <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-center py-2 px-4 rounded-full mb-4 animate-pulse">
+              <p className="text-sm font-bold">
+                ⚡ ÖZEL KAMPANYA - SINIRLI STOK! ⚡
+              </p>
+            </div>
+            <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent mb-2">
               🎨 Renkimo Tuval
             </h1>
-            <p className="text-center text-gray-600 mb-6">
-              Çocuklar İçin Özel Tasarım
+            <p className="text-center text-gray-700 font-semibold mb-2">
+              Çocuğunuzun İlk Sanat Eseri İçin
             </p>
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <span className="text-yellow-500">⭐⭐⭐⭐⭐</span>
+              <span className="text-sm text-gray-600 font-semibold">
+                (500+ Mutlu Aile)
+              </span>
+            </div>
+            <div className="bg-gradient-to-r from-green-400 to-emerald-400 text-white text-center py-2 px-4 rounded-lg mb-4 shadow-md">
+              <p className="text-sm font-bold">
+                🎨 HER SİPARİŞE 6 RENK BOYA HEDİYE! 🎁
+              </p>
+            </div>
           </div>
 
           <div className="w-full leading-[0]">
@@ -154,26 +170,100 @@ function ProductPage() {
             ))}
           </div>
 
-          <div className="bg-purple p-4 mt-0">
-            <h3 className="font-semibold text-gray-800 mb-2">
-              Ürün Özellikleri:
+          <div className="bg-gradient-to-r from-purple-100 to-pink-100 p-6 mt-0 border-t-4 border-purple-400">
+            <div className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-xl p-4 mb-4 shadow-lg">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <span className="text-3xl">🎨</span>
+                <h3 className="font-bold text-lg">HEDİYE: 6 RENK BOYA SETİ!</h3>
+                <span className="text-3xl">🎨</span>
+              </div>
+              <div className="flex justify-center gap-2 mb-2">
+                <span className="w-6 h-6 bg-red-500 rounded-full border-2 border-white shadow-md"></span>
+                <span className="w-6 h-6 bg-blue-500 rounded-full border-2 border-white shadow-md"></span>
+                <span className="w-6 h-6 bg-yellow-300 rounded-full border-2 border-white shadow-md"></span>
+                <span className="w-6 h-6 bg-green-500 rounded-full border-2 border-white shadow-md"></span>
+                <span className="w-6 h-6 bg-purple-500 rounded-full border-2 border-white shadow-md"></span>
+                <span className="w-6 h-6 bg-orange-500 rounded-full border-2 border-white shadow-md"></span>
+              </div>
+              <p className="text-center text-sm font-semibold">
+                Her tuval siparişinizle birlikte 6 renkli boya seti HEDİYE!
+              </p>
+            </div>
+
+            <h3 className="font-bold text-gray-800 mb-4 text-lg flex items-center gap-2">
+              <span className="text-2xl">✨</span> Neden Renkimo?
             </h3>
-            <ul className="text-sm text-gray-700 space-y-1">
-              <li>✓ Çocuklar için ideal boyut</li>
-              <li>✓ Kaliteli tuval malzemesi</li>
-              <li>✓ Dayanıklı ahşap çerçeve</li>
-              <li>✓ Tüm boya türleri ile uyumlu</li>
+            <ul className="text-sm text-gray-700 space-y-3">
+              <li className="flex items-start gap-2">
+                <span className="text-green-500 font-bold text-lg">✓</span>
+                <span>
+                  <strong>Çocuklar için ideal boyut</strong> - Küçük ellere özel
+                  tasarım
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-500 font-bold text-lg">✓</span>
+                <span>
+                  <strong>Premium kalite tuval</strong> - Profesyonel
+                  sanatçıların tercihi
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-500 font-bold text-lg">✓</span>
+                <span>
+                  <strong>Dayanıklı ahşap çerçeve</strong> - Yıllarca kullanım
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-500 font-bold text-lg">✓</span>
+                <span>
+                  <strong>6 renkli boya seti hediye</strong> - Hemen çizmeye
+                  başlasın!
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-500 font-bold text-lg">✓</span>
+                <span>
+                  <strong>Tüm boya türleri</strong> - Sulu, akrilik, yağlı boya
+                  uyumlu
+                </span>
+              </li>
             </ul>
+            <div className="mt-4 bg-gradient-to-r from-pink-100 to-purple-100 border-2 border-pink-300 rounded-lg p-4 shadow-md">
+              <p className="text-sm text-gray-800 font-bold text-center mb-2">
+                🎁 Çocuğunuza en güzel hediye!
+              </p>
+              <p className="text-xs text-gray-700 text-center">
+                Hayal gücünü geliştirin, yaratıcılığını destekleyin, mutluluğunu
+                izleyin! 🌈
+              </p>
+            </div>
           </div>
         </div>
 
         <div
           ref={formRef}
-          className="bg-gradient-to-br from-purple-100 via-pink-100 to-yellow-100 rounded-b-2xl shadow-xl p-6"
+          className="bg-gradient-to-br from-purple-100 via-pink-100 to-yellow-100 rounded-b-2xl shadow-xl p-6 border-t-4 border-purple-500"
         >
-          <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-            Sipariş Formu
-          </h2>
+          <div className="bg-white rounded-xl p-4 mb-6 shadow-md">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2 text-center">
+              🎉 Hemen Sipariş Ver!
+            </h2>
+            <p className="text-sm text-gray-600 text-center">
+              Çocuğunuzun yüzündeki mutluluğu görmek sadece birkaç adım uzakta
+            </p>
+            <div className="flex items-center justify-center gap-4 mt-3 text-xs">
+              <span className="bg-green-100 text-green-700 px-2 py-1 rounded-full font-semibold">
+                🔒 Güvenli
+              </span>
+              <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-semibold">
+                📦 Hızlı Kargo
+              </span>
+              <span className="bg-purple-100 text-purple-700 px-2 py-1 rounded-full font-semibold">
+                💯 Garantili
+              </span>
+            </div>
+          </div>
 
           <form
             onSubmit={handleSubmit}
@@ -290,15 +380,25 @@ function ProductPage() {
                 Adet Seçimi <span className="text-red-500">*</span>
               </label>
               <div className="space-y-3">
-                {products.map((product) => (
+                {products.map((product, index) => (
                   <label
                     key={product.quantity}
-                    className={`cursor-pointer border-2 rounded-lg p-4 flex items-center justify-between transition ${
+                    className={`cursor-pointer border-2 rounded-lg p-4 flex items-center justify-between transition relative ${
                       formData.canvasQuantity === product.quantity.toString()
-                        ? "border-purple-500 bg-purple-50"
-                        : "border-gray-300 hover:border-purple-300"
+                        ? "border-purple-500 bg-purple-50 shadow-lg"
+                        : "border-gray-300 hover:border-purple-300 hover:shadow-md"
                     }`}
                   >
+                    {index === 1 && (
+                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                        🔥 EN ÇOK TERCİH EDİLEN
+                      </div>
+                    )}
+                    {index === 2 && (
+                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-gray-800 text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                        💰 EN AVANTAJLI
+                      </div>
+                    )}
                     <div className="flex items-center gap-3">
                       <input
                         type="radio"
@@ -312,19 +412,22 @@ function ProductPage() {
                         className="w-5 h-5 text-purple-500"
                       />
                       <div>
-                        <div className="font-semibold text-gray-800">
-                          {product.quantity} Adet TUVAL - {product.price} TL
+                        <div className="font-bold text-gray-800 text-lg">
+                          {product.quantity} Adet TUVAL
+                        </div>
+                        <div className="text-purple-600 font-bold text-xl">
+                          {product.price} TL
                         </div>
                       </div>
                     </div>
                     <div className="text-right">
                       {product.freeShipping ? (
-                        <span className="text-green-600 font-semibold text-sm bg-green-50 px-2 py-1 rounded">
-                          ÜCRETSİZ KARGO
+                        <span className="text-green-600 font-bold text-sm bg-green-100 px-3 py-2 rounded-lg border-2 border-green-300 animate-pulse">
+                          🎁 ÜCRETSİZ KARGO
                         </span>
                       ) : (
-                        <span className="text-purple-600 font-semibold text-sm">
-                          + {product.shipping} TL KARGO
+                        <span className="text-gray-600 font-semibold text-sm">
+                          + {product.shipping} TL kargo
                         </span>
                       )}
                     </div>
@@ -404,9 +507,9 @@ function ProductPage() {
 
             <button
               type="submit"
-              className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-6 rounded-lg text-lg shadow-lg transform transition hover:scale-105 active:scale-95"
+              className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-5 px-6 rounded-xl text-xl shadow-2xl transform transition hover:scale-105 active:scale-95 animate-pulse"
             >
-              SİPARİŞİ TAMAMLA
+              🎉 SİPARİŞİ TAMAMLA 🎨
             </button>
           </form>
         </div>
