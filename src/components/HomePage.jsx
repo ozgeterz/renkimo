@@ -23,9 +23,6 @@ function HomePage() {
             <h1 className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-pulse">
               🎨 Renkimo
             </h1>
-            <div className="absolute -top-2 -right-2 bg-yellow-400 text-xs font-bold px-3 py-1 rounded-full rotate-12 shadow-lg animate-bounce">
-              YENİ! 🌟
-            </div>
           </div>
           <p className="text-2xl font-bold text-gray-800">
             Çocuğunuzun İlk Sanat Eseri
