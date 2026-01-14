@@ -39,7 +39,7 @@ function ProductPage() {
     selectedProducts: [],
   });
   const [districts, setDistricts] = useState([]);
-  const productImages = [st1, st2, st3];
+  const productImages = [st1, st3, st2];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -163,7 +163,7 @@ function ProductPage() {
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-pink-50 w-full max-w-[390px] mx-auto">
       <div className="max-w-md ">
         <div className="bg-white shadow-xl">
-          <div className="p-6 pb-0">
+          {/* <div className="p-6 pb-0">
             <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-center py-2 px-4 rounded-full mb-4 animate-pulse">
               <p className="text-sm font-bold">
                 ⚡ ÖZEL KAMPANYA - SINIRLI STOK! ⚡
@@ -186,7 +186,7 @@ function ProductPage() {
                 � AYNI GÜN KARGOYA VERİLİR! ⚡
               </p>
             </div>
-          </div>
+          </div> */}
 
           <div className="w-full leading-[0]" onClick={handlePageClick}>
             {productImages.map((img, index) => (
