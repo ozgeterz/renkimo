@@ -16,10 +16,10 @@ const productVariants = [
 ];
 
 const getTotalPrice = (productCount) => {
-  if (productCount === 1) return 1499;
-  if (productCount === 2) return 2499;
-  if (productCount === 3) return 3299;
-  return productCount * 1499; // Fallback for more than 3
+  if (productCount === 1) return 1199;
+  if (productCount === 2) return 2099;
+  if (productCount === 3) return 2999;
+  return productCount * 1199; // Fallback for more than 3
 };
 
 const getOriginalTotalPrice = (productCount) => {
