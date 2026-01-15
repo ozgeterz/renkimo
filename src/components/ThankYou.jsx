@@ -1,8 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 function ThankYou() {
   const navigate = useNavigate();
+  const purchaseTracked = useRef(false);
+
+  useEffect(() => {
+    if (!purchaseTracked.current && typeof window.fbq === "function") {
+      window.fbq("track", "Purchase");
+      purchaseTracked.current = true;
+    }
+  }, []);
 
   // useEffect(() => {
   //   const timer = setTimeout(() => {
