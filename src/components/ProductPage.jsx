@@ -190,12 +190,23 @@ function ProductPage() {
 
           <div className="w-full leading-[0]" onClick={handlePageClick}>
             {productImages.map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                alt={`Ayıcık Görsel ${index + 1}`}
-                className="w-full block h-auto"
-              />
+              <div key={index}>
+                <img
+                  src={img}
+                  alt={`Ayıcık Görsel ${index + 1}`}
+                  className="w-full block h-auto"
+                />
+                {index === 0 && (
+                  <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-5 shadow-lg">
+                    <p className="text-center font-extrabold text-lg">
+                      Kapıda Ödeme
+                    </p>
+                    <p className="text-center text-sm opacity-95 mt-1">
+                      Nakit veya Kart ile ödeme yapabilirsiniz.
+                    </p>
+                  </div>
+                )}
+              </div>
             ))}
           </div>
 
