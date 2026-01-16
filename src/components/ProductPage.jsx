@@ -29,6 +29,7 @@ const getOriginalTotalPrice = (productCount) => {
 function ProductPage() {
   const navigate = useNavigate();
   const formRef = useRef(null);
+  const phoneInputRef = useRef(null);
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
@@ -39,6 +40,7 @@ function ProductPage() {
     selectedProducts: [],
   });
   const [districts, setDistricts] = useState([]);
+  const [phoneError, setPhoneError] = useState("");
   const productImages = [st1, st3, st2];
 
   useEffect(() => {
@@ -63,12 +65,12 @@ function ProductPage() {
       return `+90 ${cleaned.slice(0, 3)} ${cleaned.slice(3)}`;
     } else if (cleaned.length <= 8) {
       return `+90 ${cleaned.slice(0, 3)} ${cleaned.slice(3, 6)} ${cleaned.slice(
-        6
+        6,
       )}`;
     } else {
       return `+90 ${cleaned.slice(0, 3)} ${cleaned.slice(3, 6)} ${cleaned.slice(
         6,
-        8
+        8,
       )} ${cleaned.slice(8, 10)}`;
     }
   };
@@ -80,6 +82,7 @@ function ProductPage() {
     } else if (name === "phone") {
       const formatted = formatPhoneNumber(value);
       setFormData((prev) => ({ ...prev, [name]: formatted }));
+      setPhoneError("");
     } else if (name === "productVariant") {
       setFormData((prev) => {
         let newSelected = [...prev.selectedProducts];
@@ -97,8 +100,31 @@ function ProductPage() {
     }
   };
 
+  const validatePhone = (phone) => {
+    const cleaned = phone.replace(/\D/g, "").replace(/^90/, "");
+    if (cleaned.length !== 10) {
+      return "Telefon numarası 10 haneli olmalıdır";
+    }
+    if (!cleaned.startsWith("5")) {
+      return "Telefon numarası 5 ile başlamalıdır";
+    }
+    return "";
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Telefon validasyonu
+    const phoneValidationError = validatePhone(formData.phone);
+    if (phoneValidationError) {
+      setPhoneError(phoneValidationError);
+      phoneInputRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+      phoneInputRef.current?.focus();
+      return;
+    }
 
     // Ürün seçimi kontrolü
     if (formData.selectedProducts.length === 0) {
@@ -144,7 +170,7 @@ function ProductPage() {
 
   const totalPrice = getTotalPrice(formData.selectedProducts.length);
   const totalOriginalPrice = getOriginalTotalPrice(
-    formData.selectedProducts.length
+    formData.selectedProducts.length,
   );
   const handlePageClick = () => {
     if (formRef.current) {
@@ -325,6 +351,7 @@ function ProductPage() {
                   +90
                 </span>
                 <input
+                  ref={phoneInputRef}
                   type="tel"
                   name="phone"
                   value={formData.phone.replace("+90 ", "")}
@@ -334,6 +361,9 @@ function ProductPage() {
                   placeholder="5XX XXX XX XX"
                 />
               </div>
+              {phoneError && (
+                <p className="text-red-500 text-sm mt-1">⚠️ {phoneError}</p>
+              )}
             </div>
 
             <div>
@@ -473,7 +503,7 @@ function ProductPage() {
                 <div className="space-y-3 mb-4">
                   {formData.selectedProducts.map((productId) => {
                     const variant = productVariants.find(
-                      (v) => v.id === productId
+                      (v) => v.id === productId,
                     );
                     return (
                       <div
