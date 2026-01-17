@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { citiesAndDistricts } from "../data/citiesAndDistricts";
+import { saveOrder } from "../utils/database";
 import st1 from "../assets/st1.webp";
 import st2 from "../assets/st2.webp";
 import st3 from "../assets/st3.webp";
@@ -155,6 +156,7 @@ function ProductPage() {
       "entry.457560409": paymentMethodText,
     });
 
+    // Google Forms'a gönder (mevcut yapı korunuyor)
     fetch(baseUrl, {
       method: "POST",
       mode: "no-cors",
@@ -165,6 +167,21 @@ function ProductPage() {
     }).catch((err) => {
       console.error("Google Forms gönderim hatası:", err);
     });
+
+    // Database'e kaydet (paralel olarak)
+    const orderData = {
+      fullName: formData.fullName,
+      phone: formData.phone,
+      city: formData.city,
+      district: formData.district,
+      address: formData.address,
+      selectedProducts: formData.selectedProducts,
+      paymentMethod: paymentMethodText,
+      totalPrice: totalPrice,
+    };
+
+    await saveOrder(orderData);
+
     navigate("/tesekkurler");
   };
 
