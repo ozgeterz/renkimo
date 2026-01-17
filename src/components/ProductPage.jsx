@@ -189,30 +189,48 @@ function ProductPage() {
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-pink-50 w-full max-w-[390px] mx-auto">
       <div className="max-w-md ">
         <div className="bg-white shadow-xl">
-          {/* <div className="p-6 pb-0">
-            <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-center py-2 px-4 rounded-full mb-4 animate-pulse">
-              <p className="text-sm font-bold">
-                ⚡ ÖZEL KAMPANYA - SINIRLI STOK! ⚡
+          <div
+            className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4 cursor-pointer"
+            onClick={handlePageClick}
+          >
+            <div className="text-center">
+              <p className="text-sm font-semibold mb-3">🎁 ÖZEL FİYATLAR 🎁</p>
+
+              <div className="flex justify-center gap-2 mb-3">
+                {productVariants.map((variant) => (
+                  <img
+                    key={variant.id}
+                    src={variant.image}
+                    alt={variant.name}
+                    className="w-16 h-16 rounded-lg object-cover border-2 border-white/50 shadow-lg"
+                  />
+                ))}
+              </div>
+
+              <div className="flex justify-center items-center gap-3 flex-wrap">
+                <div className="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2">
+                  <p className="text-xs opacity-90">1 Adet</p>
+                  <p className="text-lg font-bold">1.199 TL</p>
+                </div>
+                <div className="bg-white/30 backdrop-blur-sm rounded-lg px-3 py-2 border-2 border-yellow-300">
+                  <p className="text-xs opacity-90">2 Adet</p>
+                  <p className="text-lg font-bold">2.099 TL</p>
+                  <p className="text-xs text-yellow-200">300 TL İndirim!</p>
+                </div>
+                <div className="bg-white/30 backdrop-blur-sm rounded-lg px-3 py-2 border-2 border-yellow-300">
+                  <p className="text-xs opacity-90">3 Adet</p>
+                  <p className="text-lg font-bold">2.999 TL</p>
+                  <p className="text-xs text-yellow-200">600 TL İndirim!</p>
+                </div>
+              </div>
+              <p className="text-xs mt-2 opacity-90">
+                ✨ Çoklu alımlarda ekstra indirim!
+              </p>
+              <p className="text-xs mt-1 opacity-75">
+                👆 Sipariş vermek için tıklayın
               </p>
             </div>
-            <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent mb-2">
-              🧸 Uyku Arkadaşı Ayıcık
-            </h1>
-            <p className="text-center text-gray-700 font-semibold mb-2">
-              Sesli ve Işıklı - Huzurlu Uykular İçin
-            </p>
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <span className="text-yellow-500">⭐⭐⭐⭐⭐</span>
-              <span className="text-sm text-gray-600 font-semibold">
-                (500+ Mutlu Aile)
-              </span>
-            </div>
-            <div className="bg-gradient-to-r from-orange-400 to-red-400 text-white text-center py-2 px-4 rounded-lg mb-4 shadow-md animate-pulse">
-              <p className="text-sm font-bold">
-                � AYNI GÜN KARGOYA VERİLİR! ⚡
-              </p>
-            </div>
-          </div> */}
+          </div>
 
           <div className="w-full leading-[0]" onClick={handlePageClick}>
             {productImages.map((img, index) => (
@@ -488,6 +506,9 @@ function ProductPage() {
                       }`}
                     >
                       <p className="text-xs">{variant.name}</p>
+                      <p className="text-xs font-bold text-purple-600 mt-1">
+                        1.199 TL
+                      </p>
                     </div>
                   </label>
                 ))}
