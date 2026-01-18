@@ -249,13 +249,9 @@ function ProductPage() {
                   <p className="text-xs opacity-90">3 Adet</p>
                   <p className="text-base font-bold">3.499 TL</p>
                 </div>
-                <div className="bg-white/40 backdrop-blur-sm rounded-lg px-2 py-2 border-2 border-yellow-400">
-                  <p className="text-xs opacity-90">4 Adet</p>
-                  <p className="text-base font-bold">4.499 TL</p>
-                </div>
               </div>
               <p className="text-xs mt-2 opacity-90">
-                ✨ 5+ alımda her ek ürün sadece 1.000 TL!
+                ✨ 4+ alımda her ek ürün sadece 1.000 TL!
               </p>
               <p className="text-xs mt-1 opacity-75">
                 👆 Sipariş vermek için tıklayın
