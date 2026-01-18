@@ -11,9 +11,9 @@ import gm4 from "../assets/gm4.webp";
 const cities = Object.keys(citiesAndDistricts);
 
 const productVariants = [
-  { id: "blue-stitch", name: "Mavi Stitch", image: gm3 },
-  { id: "pink-bear", name: "Pembe Ayıcık", image: gm2 },
-  { id: "pink-stitch", name: "Pembe Stitch", image: gm4 },
+  { id: "mavi-stitch", name: "Mavi Stitch", image: gm3 },
+  { id: "pembe-ayıcık", name: "Pembe Ayıcık", image: gm2 },
+  { id: "pembe-stitch", name: "Pembe Stitch", image: gm4 },
 ];
 
 const getTotalPrice = (productCount) => {
