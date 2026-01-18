@@ -17,10 +17,10 @@ const productVariants = [
 ];
 
 const getTotalPrice = (productCount) => {
-  if (productCount === 1) return 1199;
-  if (productCount === 2) return 2099;
-  if (productCount === 3) return 2999;
-  return productCount * 1199; // Fallback for more than 3
+  if (productCount === 1) return 1499;
+  if (productCount === 2) return 2599;
+  if (productCount === 3) return 3199;
+  return productCount * 1499; // Fallback for more than 3
 };
 
 const getOriginalTotalPrice = (productCount) => {
@@ -227,17 +227,17 @@ function ProductPage() {
               <div className="flex justify-center items-center gap-3 flex-wrap">
                 <div className="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2">
                   <p className="text-xs opacity-90">1 Adet</p>
-                  <p className="text-lg font-bold">1.199 TL</p>
+                  <p className="text-lg font-bold">1.499 TL</p>
                 </div>
                 <div className="bg-white/30 backdrop-blur-sm rounded-lg px-3 py-2 border-2 border-yellow-300">
                   <p className="text-xs opacity-90">2 Adet</p>
-                  <p className="text-lg font-bold">2.099 TL</p>
-                  <p className="text-xs text-yellow-200">300 TL İndirim!</p>
+                  <p className="text-lg font-bold">2.599 TL</p>
+                  <p className="text-xs text-yellow-200">400 TL İndirim!</p>
                 </div>
                 <div className="bg-white/30 backdrop-blur-sm rounded-lg px-3 py-2 border-2 border-yellow-300">
                   <p className="text-xs opacity-90">3 Adet</p>
-                  <p className="text-lg font-bold">2.999 TL</p>
-                  <p className="text-xs text-yellow-200">600 TL İndirim!</p>
+                  <p className="text-lg font-bold">3.199 TL</p>
+                  <p className="text-xs text-yellow-200">1.300 TL İndirim!</p>
                 </div>
               </div>
               <p className="text-xs mt-2 opacity-90">
@@ -524,7 +524,7 @@ function ProductPage() {
                     >
                       <p className="text-xs">{variant.name}</p>
                       <p className="text-xs font-bold text-purple-600 mt-1">
-                        1.199 TL
+                        1.499 TL
                       </p>
                     </div>
                   </label>
