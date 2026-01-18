@@ -19,8 +19,10 @@ const productVariants = [
 const getTotalPrice = (productCount) => {
   if (productCount === 1) return 1499;
   if (productCount === 2) return 2599;
-  if (productCount === 3) return 3199;
-  return productCount * 1499; // Fallback for more than 3
+  if (productCount === 3) return 3499;
+  if (productCount === 4) return 4499;
+  if (productCount >= 5) return 4499 + (productCount - 4) * 1000;
+  return 0;
 };
 
 const getOriginalTotalPrice = (productCount) => {
@@ -40,6 +42,7 @@ function ProductPage() {
     paymentMethod: "cash",
     selectedProducts: [],
   });
+  const [productQuantities, setProductQuantities] = useState({});
   const [districts, setDistricts] = useState([]);
   const [phoneError, setPhoneError] = useState("");
   const productImages = [st1, st3, st2];
@@ -75,6 +78,14 @@ function ProductPage() {
       )} ${cleaned.slice(8, 10)}`;
     }
   };
+  const handleQuantityChange = (productId, delta) => {
+    setProductQuantities((prev) => {
+      const currentQty = prev[productId] || 0;
+      const newQty = Math.max(0, currentQty + delta);
+      return { ...prev, [productId]: newQty };
+    });
+  };
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (name === "city") {
@@ -85,17 +96,7 @@ function ProductPage() {
       setFormData((prev) => ({ ...prev, [name]: formatted }));
       setPhoneError("");
     } else if (name === "productVariant") {
-      setFormData((prev) => {
-        let newSelected = [...prev.selectedProducts];
-        if (checked) {
-          if (!newSelected.includes(value)) {
-            newSelected.push(value);
-          }
-        } else {
-          newSelected = newSelected.filter((id) => id !== value);
-        }
-        return { ...prev, selectedProducts: newSelected };
-      });
+      // This is now handled by quantity buttons
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
@@ -128,7 +129,11 @@ function ProductPage() {
     }
 
     // Ürün seçimi kontrolü
-    if (formData.selectedProducts.length === 0) {
+    const totalQuantity = Object.values(productQuantities).reduce(
+      (sum, qty) => sum + qty,
+      0,
+    );
+    if (totalQuantity === 0) {
       alert("⚠️ Lütfen en az bir ürün seçiniz!");
       return;
     }
@@ -138,9 +143,12 @@ function ProductPage() {
     console.log(formId);
     const baseUrl = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
 
-    const selectedProductNames = formData.selectedProducts
-      .map((id) => productVariants.find((v) => v.id === id)?.name)
-      .filter(Boolean)
+    const selectedProductNames = Object.entries(productQuantities)
+      .filter(([_, qty]) => qty > 0)
+      .map(([id, qty]) => {
+        const variant = productVariants.find((v) => v.id === id);
+        return `${variant?.name} (${qty} adet)`;
+      })
       .join(" + ");
 
     const paymentMethodText =
@@ -175,7 +183,9 @@ function ProductPage() {
       city: formData.city,
       district: formData.district,
       address: formData.address,
-      selectedProducts: formData.selectedProducts,
+      selectedProducts: Object.entries(productQuantities)
+        .filter(([_, qty]) => qty > 0)
+        .map(([id, qty]) => ({ id, quantity: qty })),
       paymentMethod: paymentMethodText,
       totalPrice: totalPrice,
     };
@@ -185,10 +195,12 @@ function ProductPage() {
     navigate("/tesekkurler");
   };
 
-  const totalPrice = getTotalPrice(formData.selectedProducts.length);
-  const totalOriginalPrice = getOriginalTotalPrice(
-    formData.selectedProducts.length,
+  const totalQuantity = Object.values(productQuantities).reduce(
+    (sum, qty) => sum + qty,
+    0,
   );
+  const totalPrice = getTotalPrice(totalQuantity);
+  const totalOriginalPrice = getOriginalTotalPrice(totalQuantity);
   const handlePageClick = () => {
     if (formRef.current) {
       const elementPosition = formRef.current.getBoundingClientRect().top;
@@ -224,24 +236,26 @@ function ProductPage() {
                 ))}
               </div>
 
-              <div className="flex justify-center items-center gap-3 flex-wrap">
-                <div className="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2">
+              <div className="flex justify-center items-center gap-2 flex-wrap">
+                <div className="bg-white/20 backdrop-blur-sm rounded-lg px-2 py-2">
                   <p className="text-xs opacity-90">1 Adet</p>
-                  <p className="text-lg font-bold">1.499 TL</p>
+                  <p className="text-base font-bold">1.499 TL</p>
                 </div>
-                <div className="bg-white/30 backdrop-blur-sm rounded-lg px-3 py-2 border-2 border-yellow-300">
+                <div className="bg-white/30 backdrop-blur-sm rounded-lg px-2 py-2 border-2 border-yellow-300">
                   <p className="text-xs opacity-90">2 Adet</p>
-                  <p className="text-lg font-bold">2.599 TL</p>
-                  <p className="text-xs text-yellow-200">400 TL İndirim!</p>
+                  <p className="text-base font-bold">2.599 TL</p>
                 </div>
-                <div className="bg-white/30 backdrop-blur-sm rounded-lg px-3 py-2 border-2 border-yellow-300">
+                <div className="bg-white/30 backdrop-blur-sm rounded-lg px-2 py-2 border-2 border-yellow-300">
                   <p className="text-xs opacity-90">3 Adet</p>
-                  <p className="text-lg font-bold">3.199 TL</p>
-                  <p className="text-xs text-yellow-200">1.300 TL İndirim!</p>
+                  <p className="text-base font-bold">3.499 TL</p>
+                </div>
+                <div className="bg-white/40 backdrop-blur-sm rounded-lg px-2 py-2 border-2 border-yellow-400">
+                  <p className="text-xs opacity-90">4 Adet</p>
+                  <p className="text-base font-bold">4.499 TL</p>
                 </div>
               </div>
               <p className="text-xs mt-2 opacity-90">
-                ✨ Çoklu alımlarda ekstra indirim!
+                ✨ 5+ alımda her ek ürün sadece 1.000 TL!
               </p>
               <p className="text-xs mt-1 opacity-75">
                 👆 Sipariş vermek için tıklayın
@@ -476,105 +490,132 @@ function ProductPage() {
                 Ürün Seçimi <span className="text-red-500">*</span>
               </label>
               <div className="grid grid-cols-3 gap-3">
-                {productVariants.map((variant) => (
-                  <label
-                    key={variant.id}
-                    className={`cursor-pointer border-3 rounded-xl overflow-hidden transition-all ${
-                      formData.selectedProducts.includes(variant.id)
-                        ? "border-purple-500 ring-4 ring-purple-200 shadow-xl scale-105"
-                        : "border-gray-300 hover:border-purple-300 hover:shadow-lg"
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      name="productVariant"
-                      value={variant.id}
-                      checked={formData.selectedProducts.includes(variant.id)}
-                      onChange={handleChange}
-                      className="hidden"
-                    />
-                    <div className="relative">
-                      <img
-                        src={variant.image}
-                        alt={variant.name}
-                        className="w-full h-24 object-cover"
-                      />
-                      {formData.selectedProducts.includes(variant.id) && (
-                        <div className="absolute top-1 right-1 bg-purple-500 text-white rounded-full p-1">
-                          <svg
-                            className="w-4 h-4"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      )}
-                    </div>
+                {productVariants.map((variant) => {
+                  const quantity = productQuantities[variant.id] || 0;
+                  return (
                     <div
-                      className={`p-2 text-center ${
-                        formData.selectedProducts.includes(variant.id)
-                          ? "bg-purple-50 font-bold text-purple-700"
-                          : "bg-white text-gray-700"
+                      key={variant.id}
+                      className={`border-3 rounded-xl overflow-hidden transition-all ${
+                        quantity > 0
+                          ? "border-purple-500 ring-4 ring-purple-200 shadow-xl"
+                          : "border-gray-300"
                       }`}
                     >
-                      <p className="text-xs">{variant.name}</p>
-                      <p className="text-xs font-bold text-purple-600 mt-1">
-                        1.499 TL
-                      </p>
+                      <div className="relative">
+                        <img
+                          src={variant.image}
+                          alt={variant.name}
+                          className="w-full h-24 object-cover"
+                        />
+                        {quantity > 0 && (
+                          <div className="absolute top-1 right-1 bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm">
+                            {quantity}
+                          </div>
+                        )}
+                      </div>
+                      <div
+                        className={`p-2 ${quantity > 0 ? "bg-purple-50" : "bg-white"}`}
+                      >
+                        <p className="text-xs text-center font-semibold text-gray-800">
+                          {variant.name}
+                        </p>
+                        <p className="text-xs font-bold text-purple-600 text-center mt-1">
+                          1.499 TL
+                        </p>
+                        <div className="flex items-center justify-center gap-2 mt-2">
+                          <button
+                            type="button"
+                            onClick={() => handleQuantityChange(variant.id, -1)}
+                            disabled={quantity === 0}
+                            className="w-8 h-8 rounded-full bg-red-500 text-white font-bold text-lg flex items-center justify-center hover:bg-red-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"
+                          >
+                            −
+                          </button>
+                          <span className="w-8 text-center font-bold text-gray-800">
+                            {quantity}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => handleQuantityChange(variant.id, 1)}
+                            className="w-8 h-8 rounded-full bg-green-500 text-white font-bold text-lg flex items-center justify-center hover:bg-green-600 transition-all"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                  </label>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
-            {formData.selectedProducts.length > 0 && (
+            {totalQuantity > 0 && (
               <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-purple-200 shadow-lg">
                 <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
                   🛒 Sepetiniz
                 </h3>
 
                 <div className="space-y-3 mb-4">
-                  {formData.selectedProducts.map((productId) => {
-                    const variant = productVariants.find(
-                      (v) => v.id === productId,
-                    );
-                    return (
-                      <div
-                        key={productId}
-                        className="bg-white rounded-xl p-4 flex items-center justify-between shadow-md hover:shadow-lg transition-all"
-                      >
-                        <div className="flex items-center gap-3">
-                          <img
-                            src={variant?.image}
-                            alt={variant?.name}
-                            className="w-16 h-16 rounded-lg object-cover border-2 border-purple-200"
-                          />
-                          <div>
-                            <p className="font-bold text-gray-800">
-                              {variant?.name}
-                            </p>
-                            <p className="text-xs text-gray-500">1 Adet</p>
+                  {Object.entries(productQuantities)
+                    .filter(([_, qty]) => qty > 0)
+                    .map(([productId, qty]) => {
+                      const variant = productVariants.find(
+                        (v) => v.id === productId,
+                      );
+                      return (
+                        <div
+                          key={productId}
+                          className="bg-white rounded-xl p-4 flex items-center justify-between shadow-md hover:shadow-lg transition-all"
+                        >
+                          <div className="flex items-center gap-3">
+                            <img
+                              src={variant?.image}
+                              alt={variant?.name}
+                              className="w-16 h-16 rounded-lg object-cover border-2 border-purple-200"
+                            />
+                            <div>
+                              <p className="font-bold text-gray-800">
+                                {variant?.name}
+                              </p>
+                              <p className="text-xs text-gray-500">
+                                {qty} Adet
+                              </p>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className="flex items-center gap-2">
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  handleQuantityChange(productId, -1)
+                                }
+                                className="w-6 h-6 rounded-full bg-red-500 text-white font-bold text-sm flex items-center justify-center hover:bg-red-600 transition-all"
+                              >
+                                −
+                              </button>
+                              <span className="font-bold text-purple-600 min-w-[2rem] text-center">
+                                {qty}
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  handleQuantityChange(productId, 1)
+                                }
+                                className="w-6 h-6 rounded-full bg-green-500 text-white font-bold text-sm flex items-center justify-center hover:bg-green-600 transition-all"
+                              >
+                                +
+                              </button>
+                            </div>
                           </div>
                         </div>
-                        <div className="text-right">
-                          <span className="text-green-600 text-sm font-semibold">
-                            ✓ Seçildi
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
                 </div>
 
                 <div className="bg-white rounded-xl p-4 space-y-2">
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">
-                      Ara Toplam ({formData.selectedProducts.length} ürün)
+                      Ara Toplam ({totalQuantity} ürün)
                     </span>
                     <span className="font-semibold">{totalPrice} TL</span>
                   </div>
@@ -584,20 +625,24 @@ function ProductPage() {
                       ÜCRETSİZ 🎁
                     </span>
                   </div>
-                  <div className="flex justify-between text-sm text-red-500">
-                    <span>İndirim</span>
-                    <span className="font-semibold">
-                      -{totalOriginalPrice - totalPrice} TL
-                    </span>
-                  </div>
+                  {totalOriginalPrice > totalPrice && (
+                    <div className="flex justify-between text-sm text-red-500">
+                      <span>İndirim</span>
+                      <span className="font-semibold">
+                        -{totalOriginalPrice - totalPrice} TL
+                      </span>
+                    </div>
+                  )}
                   <div className="border-t-2 border-purple-200 pt-3 flex justify-between items-center">
                     <span className="font-bold text-lg text-gray-800">
                       Toplam
                     </span>
                     <div className="text-right">
-                      <p className="text-sm text-gray-400 line-through">
-                        {totalOriginalPrice} TL
-                      </p>
+                      {totalOriginalPrice > totalPrice && (
+                        <p className="text-sm text-gray-400 line-through">
+                          {totalOriginalPrice} TL
+                        </p>
+                      )}
                       <p className="font-bold text-2xl text-purple-600">
                         {totalPrice} TL
                       </p>
