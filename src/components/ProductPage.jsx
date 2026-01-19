@@ -12,7 +12,7 @@ const cities = Object.keys(citiesAndDistricts);
 
 const productVariants = [
   { id: "mavi-stitch", name: "Mavi Stitch", image: gm3 },
-  { id: "pembe-ayıcık", name: "Pembe Ayıcık", image: gm2 },
+  // { id: "pembe-ayıcık", name: "Pembe Ayıcık", image: gm2 },
   { id: "pembe-stitch", name: "Pembe Stitch", image: gm4 },
 ];
 
