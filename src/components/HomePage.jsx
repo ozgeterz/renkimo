@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import st3 from "../assets/st3.webp";
+import Footer from "./Footer";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -140,6 +141,8 @@ function HomePage() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

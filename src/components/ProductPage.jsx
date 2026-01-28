@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { citiesAndDistricts } from "../data/citiesAndDistricts";
 import { saveOrder } from "../utils/database";
+import Footer from "./Footer";
 import st1 from "../assets/st1.webp";
 import st2 from "../assets/st2.webp";
 import st3 from "../assets/st3.webp";
@@ -45,6 +46,7 @@ function ProductPage() {
   const [productQuantities, setProductQuantities] = useState({});
   const [districts, setDistricts] = useState([]);
   const [phoneError, setPhoneError] = useState("");
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const productImages = [st1, st3, st2];
 
   useEffect(() => {
@@ -138,6 +140,11 @@ function ProductPage() {
       return;
     }
 
+    // Show confirmation modal
+    setShowConfirmModal(true);
+  };
+
+  const handleConfirmOrder = async () => {
     const formId = import.meta.env.VITE_GOOGLE_FORM_ID_AYI;
     if (!formId) return;
     console.log(formId);
@@ -192,6 +199,7 @@ function ProductPage() {
 
     await saveOrder(orderData);
 
+    setShowConfirmModal(false);
     navigate("/tesekkurler");
   };
 
@@ -215,8 +223,8 @@ function ProductPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-pink-50 w-full max-w-[390px] mx-auto">
-      <div className="max-w-md ">
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-pink-50 w-full max-w-[390px] mx-auto flex flex-col">
+      <div className="flex-1 max-w-md ">
         <div className="bg-white shadow-xl">
           <div
             className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4 cursor-pointer"
@@ -721,6 +729,74 @@ function ProductPage() {
           </form>
         </div>
       </div>
+
+      <Footer />
+
+      {showConfirmModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-[scale-in_0.2s_ease-out]">
+            <div className="text-center mb-6">
+              <div className="text-6xl mb-4">🎉</div>
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                Siparişi Onaylıyor musunuz?
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Sipariş bilgilerinizi kontrol edin
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 mb-6 space-y-3">
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-600 font-medium">Ad Soyad:</span>
+                <span className="font-bold text-gray-800">
+                  {formData.fullName}
+                </span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-600 font-medium">Telefon:</span>
+                <span className="font-bold text-gray-800">
+                  {formData.phone}
+                </span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-600 font-medium">Adres:</span>
+                <span className="font-bold text-gray-800 text-right">
+                  {formData.city}, {formData.district}
+                </span>
+              </div>
+              <div className="border-t border-purple-200 pt-3">
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="text-gray-600 font-medium">Ürünler:</span>
+                  <span className="font-bold text-gray-800">
+                    {totalQuantity} Adet
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-700 font-bold">Toplam:</span>
+                  <span className="font-bold text-2xl text-purple-600">
+                    {totalPrice} TL
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowConfirmModal(false)}
+                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-xl transition-all"
+              >
+                ❌ İptal
+              </button>
+              <button
+                onClick={handleConfirmOrder}
+                className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 px-4 rounded-xl transition-all transform hover:scale-105"
+              >
+                ✅ Onayla
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
