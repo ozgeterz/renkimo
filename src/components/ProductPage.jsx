@@ -47,6 +47,7 @@ function ProductPage() {
   const [districts, setDistricts] = useState([]);
   const [phoneError, setPhoneError] = useState("");
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const productImages = [st1, st3, st2];
 
   useEffect(() => {
@@ -145,8 +146,14 @@ function ProductPage() {
   };
 
   const handleConfirmOrder = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
     const formId = import.meta.env.VITE_GOOGLE_FORM_ID_AYI;
-    if (!formId) return;
+    if (!formId) {
+      setIsSubmitting(false);
+      return;
+    }
     console.log(formId);
     const baseUrl = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
 
@@ -197,10 +204,15 @@ function ProductPage() {
       totalPrice: totalPrice,
     };
 
-    await saveOrder(orderData);
-
-    setShowConfirmModal(false);
-    navigate("/tesekkurler");
+    try {
+      await saveOrder(orderData);
+      setShowConfirmModal(false);
+      navigate("/tesekkurler");
+    } catch (error) {
+      console.error("Sipariş gönderim hatası:", error);
+      alert("Sipariş gönderilirken bir hata oluştu. Lütfen tekrar deneyin.");
+      setIsSubmitting(false);
+    }
   };
 
   const totalQuantity = Object.values(productQuantities).reduce(
@@ -783,15 +795,17 @@ function ProductPage() {
             <div className="flex gap-3">
               <button
                 onClick={() => setShowConfirmModal(false)}
-                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-xl transition-all"
+                disabled={isSubmitting}
+                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 ❌ İptal
               </button>
               <button
                 onClick={handleConfirmOrder}
-                className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 px-4 rounded-xl transition-all transform hover:scale-105"
+                disabled={isSubmitting}
+                className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 px-4 rounded-xl transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
-                ✅ Onayla
+                {isSubmitting ? "⏳ Gönderiliyor..." : "✅ Onayla"}
               </button>
             </div>
           </div>
