@@ -383,199 +383,9 @@ function ProductPage() {
               </li>
             </ul>
 
-            {/* Hediye Senaryoları */}
-            <div className="mt-6 mb-4">
-              <h3 className="font-bold text-gray-800 mb-4 text-lg flex items-center gap-2">
-                <span className="text-2xl">🎁</span> Kime Hediye Edebilirsiniz?
-              </h3>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="bg-gradient-to-br from-pink-200 to-red-200 rounded-xl p-4 text-center shadow-md hover:shadow-lg transition-all">
-                  <span className="text-3xl">💕</span>
-                  <p className="font-bold text-gray-800 text-sm mt-2">
-                    Sevgilinize
-                  </p>
-                  <p className="text-xs text-gray-600 mt-1">
-                    Romantik bir sürpriz!
-                  </p>
-                </div>
-                <div className="bg-gradient-to-br from-blue-200 to-purple-200 rounded-xl p-4 text-center shadow-md hover:shadow-lg transition-all">
-                  <span className="text-3xl">👶</span>
-                  <p className="font-bold text-gray-800 text-sm mt-2">
-                    Çocuğunuza
-                  </p>
-                  <p className="text-xs text-gray-600 mt-1">
-                    Huzurlu uykular için!
-                  </p>
-                </div>
-                <div className="bg-gradient-to-br from-yellow-200 to-orange-200 rounded-xl p-4 text-center shadow-md hover:shadow-lg transition-all">
-                  <span className="text-3xl">👫</span>
-                  <p className="font-bold text-gray-800 text-sm mt-2">
-                    Arkadaşınıza
-                  </p>
-                  <p className="text-xs text-gray-600 mt-1">
-                    Unutulmaz bir hediye!
-                  </p>
-                </div>
-                <div className="bg-gradient-to-br from-green-200 to-teal-200 rounded-xl p-4 text-center shadow-md hover:shadow-lg transition-all">
-                  <span className="text-3xl">👨‍👩‍👧</span>
-                  <p className="font-bold text-gray-800 text-sm mt-2">
-                    Ailenize
-                  </p>
-                  <p className="text-xs text-gray-600 mt-1">
-                    Sevgi dolu anlar!
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Özel Günler */}
-            <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl p-4 mb-4 shadow-lg">
-              <h4 className="font-bold text-center mb-3">
-                🎉 Her Özel Gün İçin Mükemmel!
-              </h4>
-              <div className="flex flex-wrap justify-center gap-2">
-                <span className="bg-white/20 px-3 py-1 rounded-full text-xs font-semibold">
-                  💝 Sevgililer Günü
-                </span>
-                <span className="bg-white/20 px-3 py-1 rounded-full text-xs font-semibold">
-                  � Doğum Günü
-                </span>
-                <span className="bg-white/20 px-3 py-1 rounded-full text-xs font-semibold">
-                  🎄 Yılbaşı
-                </span>
-                <span className="bg-white/20 px-3 py-1 rounded-full text-xs font-semibold">
-                  👩 Anneler Günü
-                </span>
-                <span className="bg-white/20 px-3 py-1 rounded-full text-xs font-semibold">
-                  🎓 Mezuniyet
-                </span>
-                <span className="bg-white/20 px-3 py-1 rounded-full text-xs font-semibold">
-                  💑 Yıldönümü
-                </span>
-              </div>
-            </div>
-
-            {/* Müşteri Yorumları */}
-            <div className="mt-4 mb-4">
-              <h3 className="font-bold text-gray-800 mb-4 text-lg flex items-center gap-2">
-                <span className="text-2xl">⭐</span> Müşterilerimiz Ne Diyor?
-              </h3>
-              <div className="space-y-3">
-                <div className="bg-white rounded-xl p-4 shadow-md border-l-4 border-yellow-400">
-                  <div className="flex items-center gap-1 mb-2">
-                    <span className="text-yellow-400">★★★★★</span>
-                  </div>
-                  <p className="text-sm text-gray-700 italic">
-                    "Sevgilime aldım, bayıldı! Işıklı özelliği çok romantik.
-                    Kesinlikle tavsiye ederim."
-                  </p>
-                  <p className="text-xs text-gray-500 mt-2 font-semibold">
-                    - Elif K. ✓ Onaylı Alıcı
-                  </p>
-                </div>
-                <div className="bg-white rounded-xl p-4 shadow-md border-l-4 border-pink-400">
-                  <div className="flex items-center gap-1 mb-2">
-                    <span className="text-yellow-400">★★★★★</span>
-                  </div>
-                  <p className="text-sm text-gray-700 italic">
-                    "Kızım artık bu ayıcık olmadan uyumuyor. Ninnileri çok
-                    seviyor, huzurlu uykular!"
-                  </p>
-                  <p className="text-xs text-gray-500 mt-2 font-semibold">
-                    - Ayşe M. ✓ Onaylı Alıcı
-                  </p>
-                </div>
-                <div className="bg-white rounded-xl p-4 shadow-md border-l-4 border-purple-400">
-                  <div className="flex items-center gap-1 mb-2">
-                    <span className="text-yellow-400">★★★★★</span>
-                  </div>
-                  <p className="text-sm text-gray-700 italic">
-                    "Arkadaşıma doğum günü hediyesi olarak aldım. Çok beğendi,
-                    kalitesi harika!"
-                  </p>
-                  <p className="text-xs text-gray-500 mt-2 font-semibold">
-                    - Mehmet Y. ✓ Onaylı Alıcı
-                  </p>
-                </div>
-              </div>
-              <div className="mt-3 text-center">
-                <p className="text-sm text-gray-600 font-semibold">
-                  📊 <span className="text-green-600">2.847+</span> Mutlu
-                  Müşteri
-                </p>
-              </div>
-            </div>
-
-            {/* Güven Rozetleri */}
-            <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 mb-4 border-2 border-green-200">
-              <h4 className="font-bold text-gray-800 text-center mb-3">
-                🛡️ Güvenle Alışveriş
-              </h4>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="flex items-center gap-2 bg-white rounded-lg p-2 shadow-sm">
-                  <span className="text-2xl">✅</span>
-                  <div>
-                    <p className="text-xs font-bold text-gray-800">
-                      CE Sertifikalı
-                    </p>
-                    <p className="text-xs text-gray-500">Güvenlik onaylı</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 bg-white rounded-lg p-2 shadow-sm">
-                  <span className="text-2xl">🔄</span>
-                  <div>
-                    <p className="text-xs font-bold text-gray-800">
-                      14 Gün İade
-                    </p>
-                    <p className="text-xs text-gray-500">Koşulsuz iade</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 bg-white rounded-lg p-2 shadow-sm">
-                  <span className="text-2xl">🚚</span>
-                  <div>
-                    <p className="text-xs font-bold text-gray-800">
-                      Hızlı Kargo
-                    </p>
-                    <p className="text-xs text-gray-500">1-3 iş günü</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 bg-white rounded-lg p-2 shadow-sm">
-                  <span className="text-2xl">💯</span>
-                  <div>
-                    <p className="text-xs font-bold text-gray-800">
-                      Orijinal Ürün
-                    </p>
-                    <p className="text-xs text-gray-500">%100 garantili</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Video Bölümü */}
-            <div className="bg-white rounded-xl p-4 mb-4 shadow-md">
-              <h4 className="font-bold text-gray-800 text-center mb-3">
-                🎬 Ürünü İzleyin!
-              </h4>
-              <video
-                className="w-full rounded-lg shadow-lg"
-                controls
-                playsInline
-                preload="metadata"
-              >
-                <source src={filVideo} type="video/mp4" />
-                Tarayıcınız video oynatmayı desteklemiyor.
-              </video>
-            </div>
-
-            <div className="mt-4 bg-gradient-to-r from-yellow-100 to-orange-100 border-2 border-yellow-300 rounded-lg p-4 shadow-md">
-              <p className="text-sm text-gray-800 font-bold text-center mb-2">
-                🎁 Sevdiklerinize en güzel hediye!
-              </p>
-              <p className="text-xs text-gray-700 text-center">
-                Çocuğunuz, sevgiliniz veya arkadaşınız için mükemmel bir
-                sürpriz! 💝
-              </p>
-            </div>
+            <p className="text-center text-xs text-gray-500 mt-2">
+              Kapıda Ödeme • Ücretsiz Kargo
+            </p>
           </div>
         </div>
 
@@ -1107,23 +917,130 @@ function ProductPage() {
                 </details>
               </div>
             </div>
+          </form>
 
-            {/* Son CTA */}
-            <div className="mt-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl p-4 text-white text-center shadow-lg">
-              <p className="font-bold text-lg mb-2">
-                💝 Sevdiklerinizi Mutlu Edin!
-              </p>
-              <p className="text-sm opacity-90 mb-3">
-                Çocuğunuz, sevgiliniz veya arkadaşınız için mükemmel bir hediye
-              </p>
-              <div className="flex justify-center gap-2 text-2xl">
-                <span>👶</span>
-                <span>💕</span>
-                <span>👫</span>
-                <span>👨‍👩‍👧</span>
+          {/* Müşteri Yorumları - Form Sonrası */}
+          <div className="mt-6 mb-4">
+            <h3 className="font-bold text-gray-800 mb-4 text-lg flex items-center gap-2">
+              <span className="text-2xl">⭐</span> Müşterilerimiz Ne Diyor?
+            </h3>
+            <div className="space-y-3">
+              <div className="bg-white rounded-xl p-4 shadow-md border-l-4 border-yellow-400">
+                <div className="flex items-center gap-1 mb-2">
+                  <span className="text-yellow-400">★★★★★</span>
+                </div>
+                <p className="text-sm text-gray-700 italic">
+                  "Sevgilime aldım, bayıldı! Işıklı özelliği çok romantik.
+                  Kesinlikle tavsiye ederim."
+                </p>
+                <p className="text-xs text-gray-500 mt-2 font-semibold">
+                  - Elif K. ✓ Onaylı Alıcı
+                </p>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-md border-l-4 border-pink-400">
+                <div className="flex items-center gap-1 mb-2">
+                  <span className="text-yellow-400">★★★★★</span>
+                </div>
+                <p className="text-sm text-gray-700 italic">
+                  "Kızım artık bu ayıcık olmadan uyumuyor. Ninnileri çok
+                  seviyor, huzurlu uykular!"
+                </p>
+                <p className="text-xs text-gray-500 mt-2 font-semibold">
+                  - Ayşe M. ✓ Onaylı Alıcı
+                </p>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-md border-l-4 border-purple-400">
+                <div className="flex items-center gap-1 mb-2">
+                  <span className="text-yellow-400">★★★★★</span>
+                </div>
+                <p className="text-sm text-gray-700 italic">
+                  "Arkadaşıma doğum günü hediyesi olarak aldım. Çok beğendi,
+                  kalitesi harika!"
+                </p>
+                <p className="text-xs text-gray-500 mt-2 font-semibold">
+                  - Mehmet Y. ✓ Onaylı Alıcı
+                </p>
               </div>
             </div>
-          </form>
+            <div className="mt-3 text-center">
+              <p className="text-sm text-gray-600 font-semibold">
+                📊 <span className="text-green-600">2.847+</span> Mutlu Müşteri
+              </p>
+            </div>
+          </div>
+
+          {/* Hediye Senaryoları */}
+          <div className="mb-4">
+            <h3 className="font-bold text-gray-800 mb-4 text-lg flex items-center gap-2">
+              <span className="text-2xl">🎁</span> Kime Hediye Edebilirsiniz?
+            </h3>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-gradient-to-br from-pink-200 to-red-200 rounded-xl p-4 text-center shadow-md">
+                <span className="text-3xl">💕</span>
+                <p className="font-bold text-gray-800 text-sm mt-2">
+                  Sevgilinize
+                </p>
+                <p className="text-xs text-gray-600 mt-1">
+                  Romantik bir sürpriz!
+                </p>
+              </div>
+              <div className="bg-gradient-to-br from-blue-200 to-purple-200 rounded-xl p-4 text-center shadow-md">
+                <span className="text-3xl">👶</span>
+                <p className="font-bold text-gray-800 text-sm mt-2">
+                  Çocuğunuza
+                </p>
+                <p className="text-xs text-gray-600 mt-1">
+                  Huzurlu uykular için!
+                </p>
+              </div>
+              <div className="bg-gradient-to-br from-yellow-200 to-orange-200 rounded-xl p-4 text-center shadow-md">
+                <span className="text-3xl">👫</span>
+                <p className="font-bold text-gray-800 text-sm mt-2">
+                  Arkadaşınıza
+                </p>
+                <p className="text-xs text-gray-600 mt-1">
+                  Unutulmaz bir hediye!
+                </p>
+              </div>
+              <div className="bg-gradient-to-br from-green-200 to-teal-200 rounded-xl p-4 text-center shadow-md">
+                <span className="text-3xl">👨‍👩‍👧</span>
+                <p className="font-bold text-gray-800 text-sm mt-2">Ailenize</p>
+                <p className="text-xs text-gray-600 mt-1">Sevgi dolu anlar!</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Video Bölümü */}
+          <div className="bg-white rounded-xl p-4 mb-4 shadow-md">
+            <h4 className="font-bold text-gray-800 text-center mb-3">
+              🎬 Ürünü İzleyin!
+            </h4>
+            <video
+              className="w-full rounded-lg shadow-lg"
+              controls
+              playsInline
+              preload="metadata"
+            >
+              <source src={filVideo} type="video/mp4" />
+              Tarayıcınız video oynatmayı desteklemiyor.
+            </video>
+          </div>
+
+          {/* Son CTA */}
+          <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl p-4 text-white text-center shadow-lg">
+            <p className="font-bold text-lg mb-2">
+              💝 Sevdiklerinizi Mutlu Edin!
+            </p>
+            <p className="text-sm opacity-90 mb-3">
+              Çocuğunuz, sevgiliniz veya arkadaşınız için mükemmel bir hediye
+            </p>
+            <div className="flex justify-center gap-2 text-2xl">
+              <span>👶</span>
+              <span>💕</span>
+              <span>👫</span>
+              <span>👨‍👩‍👧</span>
+            </div>
+          </div>
         </div>
       </div>
 
