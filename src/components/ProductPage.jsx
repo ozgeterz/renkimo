@@ -9,6 +9,8 @@ import st3 from "../assets/st3.webp";
 import gm2 from "../assets/gm2.webp";
 import gm3 from "../assets/gm3.webp";
 import gm4 from "../assets/gm4.webp";
+import wp from "../assets/wp.webp";
+import wp2 from "../assets/wp2.webp";
 const cities = Object.keys(citiesAndDistricts);
 
 const productVariants = [
@@ -48,8 +50,11 @@ function ProductPage() {
   const [phoneError, setPhoneError] = useState("");
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const productImages = [st1, st3, st2];
-
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const productImages = [wp];
+  const sliderImages = [wp2, st2, st3];
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -234,6 +239,40 @@ function ProductPage() {
     }
   };
 
+  const handlePrevSlide = () => {
+    setCurrentSlide((prev) =>
+      prev === 0 ? sliderImages.length - 1 : prev - 1,
+    );
+  };
+
+  const handleNextSlide = () => {
+    setCurrentSlide((prev) =>
+      prev === sliderImages.length - 1 ? 0 : prev + 1,
+    );
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      handleNextSlide();
+    }
+    if (isRightSwipe) {
+      handlePrevSlide();
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-pink-50 w-full max-w-[390px] mx-auto flex flex-col">
       <div className="flex-1 max-w-md ">
@@ -287,16 +326,6 @@ function ProductPage() {
                   alt={`Ayıcık Görsel ${index + 1}`}
                   className="w-full block h-auto"
                 />
-                {index === 0 && (
-                  <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-5 shadow-lg">
-                    <p className="text-center font-extrabold text-lg">
-                      Kapıda Ödeme
-                    </p>
-                    <p className="text-center text-sm opacity-95 mt-1">
-                      Nakit veya Kart ile ödeme yapabilirsiniz.
-                    </p>
-                  </div>
-                )}
               </div>
             ))}
           </div>
@@ -386,7 +415,95 @@ function ProductPage() {
               </span>
             </div>
           </div>
+          <div className="relative w-full mb-6">
+            <div
+              className="w-full leading-[0] overflow-hidden"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              <div
+                className="flex transition-transform duration-300 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {sliderImages.map((img, index) => (
+                  <div key={index} className="w-full flex-shrink-0">
+                    <img
+                      src={img}
+                      alt={`Ayıcık Görsel ${index + 1}`}
+                      className="w-full block h-auto"
+                      onClick={handlePageClick}
+                    />
+                    <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-5 shadow-lg">
+                      <p className="text-center font-extrabold text-lg">
+                        Kapıda Ödeme
+                      </p>
+                      <p className="text-center text-sm opacity-95 mt-1">
+                        Nakit veya Kart ile ödeme yapabilirsiniz.
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
+            <button
+              onClick={handlePrevSlide}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-3 shadow-lg transition-all hover:scale-110 z-10"
+              aria-label="Önceki resim"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={3}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 19.5L8.25 12l7.5-7.5"
+                />
+              </svg>
+            </button>
+
+            <button
+              onClick={handleNextSlide}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-3 shadow-lg transition-all hover:scale-110 z-10"
+              aria-label="Sonraki resim"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={3}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                />
+              </svg>
+            </button>
+
+            <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+              {sliderImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    currentSlide === index
+                      ? "bg-white w-6"
+                      : "bg-white/50 hover:bg-white/75"
+                  }`}
+                  aria-label={`${index + 1}. resme git`}
+                />
+              ))}
+            </div>
+          </div>
           <form
             onSubmit={handleSubmit}
             className="space-y-4"
