@@ -291,7 +291,10 @@ function ProductPage() {
                     key={variant.id}
                     src={variant.image}
                     alt={variant.name}
+                    loading="eager"
+                    decoding="async"
                     className="w-16 h-16 rounded-lg object-cover border-2 border-white/50 shadow-lg"
+                    style={{ backgroundColor: "#e9d5ff" }}
                   />
                 ))}
               </div>
@@ -325,7 +328,10 @@ function ProductPage() {
                 <img
                   src={img}
                   alt={`Ayıcık Görsel ${index + 1}`}
+                  loading="eager"
+                  decoding="async"
                   className="w-full block h-auto"
+                  style={{ backgroundColor: "#fdf4ff" }}
                 />
               </div>
             ))}
@@ -443,7 +449,10 @@ function ProductPage() {
                     <img
                       src={img}
                       alt={`Ayıcık Görsel ${index + 1}`}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      decoding="async"
                       className="w-full block h-auto"
+                      style={{ backgroundColor: "#fdf4ff", minHeight: "200px" }}
                       onClick={handlePageClick}
                     />
                     <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-5 shadow-lg">
@@ -650,7 +659,10 @@ function ProductPage() {
                         <img
                           src={variant.image}
                           alt={variant.name}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-24 object-cover"
+                          style={{ backgroundColor: "#e9d5ff" }}
                         />
                         {quantity > 0 && (
                           <div className="absolute top-1 right-1 bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm">
@@ -716,7 +728,10 @@ function ProductPage() {
                             <img
                               src={variant?.image}
                               alt={variant?.name}
+                              loading="lazy"
+                              decoding="async"
                               className="w-16 h-16 rounded-lg object-cover border-2 border-purple-200"
+                              style={{ backgroundColor: "#e9d5ff" }}
                             />
                             <div>
                               <p className="font-bold text-gray-800">
@@ -1019,7 +1034,9 @@ function ProductPage() {
               className="w-full rounded-lg shadow-lg"
               controls
               playsInline
-              preload="metadata"
+              preload="auto"
+              poster={gm3}
+              style={{ backgroundColor: "#f3e8ff" }}
             >
               <source src={filVideo} type="video/mp4" />
               Tarayıcınız video oynatmayı desteklemiyor.
