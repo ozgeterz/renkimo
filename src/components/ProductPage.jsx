@@ -38,6 +38,8 @@ function ProductPage() {
   const formRef = useRef(null);
   const phoneInputRef = useRef(null);
   const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
     fullName: "",
     phone: "",
     city: "",
@@ -104,6 +106,14 @@ function ProductPage() {
       const formatted = formatPhoneNumber(value);
       setFormData((prev) => ({ ...prev, [name]: formatted }));
       setPhoneError("");
+    } else if (name === "firstName" || name === "lastName") {
+      setFormData((prev) => {
+        const updatedData = { ...prev, [name]: value };
+        const firstName = name === "firstName" ? value : prev.firstName;
+        const lastName = name === "lastName" ? value : prev.lastName;
+        updatedData.fullName = `${firstName} ${lastName}`.trim();
+        return updatedData;
+      });
     } else if (name === "productVariant") {
       // This is now handled by quantity buttons
     } else {
@@ -530,19 +540,35 @@ function ProductPage() {
             className="space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Ad Soyad
-              </label>
-              <input
-                type="text"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none"
-                placeholder="Adınız ve Soyadınız"
-              />
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Ad
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none"
+                  placeholder="Adınız"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Soyad
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none"
+                  placeholder="Soyadınız"
+                />
+              </div>
             </div>
 
             <div>
