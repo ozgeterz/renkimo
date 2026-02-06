@@ -193,8 +193,8 @@ function ProductPage() {
       "entry.1955750203": formData.address,
       "entry.1839909422": `${selectedProductNames}`,
       "entry.457560409": paymentMethodText,
-      "entry.723679911": `${totalPrice}`,
-      "entry.1179587352": formData.shippingMethod,
+      "entry.325234826": `${totalPrice} TL`,
+      "entry.1704464985": formData.shippingMethod,
     });
 
     // Google Forms'a gönder (mevcut yapı korunuyor)
