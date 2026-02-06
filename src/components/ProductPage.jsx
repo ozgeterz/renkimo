@@ -46,6 +46,7 @@ function ProductPage() {
     district: "",
     address: "",
     paymentMethod: "cash",
+    shippingMethod: "ARAS",
     selectedProducts: [],
   });
   const [productQuantities, setProductQuantities] = useState({});
@@ -192,6 +193,8 @@ function ProductPage() {
       "entry.1955750203": formData.address,
       "entry.1839909422": `${selectedProductNames}`,
       "entry.457560409": paymentMethodText,
+      "entry.723679911": `${totalPrice}`,
+      "entry.1179587352": formData.shippingMethod,
     });
 
     // Google Forms'a gönder (mevcut yapı korunuyor)
@@ -217,6 +220,7 @@ function ProductPage() {
         .filter(([_, qty]) => qty > 0)
         .map(([id, qty]) => ({ id, quantity: qty })),
       paymentMethod: paymentMethodText,
+      shippingMethod: formData.shippingMethod,
       totalPrice: totalPrice,
     };
 
@@ -896,6 +900,70 @@ function ProductPage() {
                       }`}
                     >
                       Kapıda Kart
+                    </p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Kargo Firması <span className="text-red-500">*</span>
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                <label
+                  className={`cursor-pointer border-2 rounded-xl p-4 transition-all ${
+                    formData.shippingMethod === "ARAS"
+                      ? "border-purple-500 bg-purple-50 ring-2 ring-purple-200"
+                      : "border-gray-300 hover:border-purple-300"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="shippingMethod"
+                    value="ARAS"
+                    checked={formData.shippingMethod === "ARAS"}
+                    onChange={handleChange}
+                    className="hidden"
+                  />
+                  <div className="text-center">
+                    <div className="text-3xl mb-2">📦</div>
+                    <p
+                      className={`font-bold text-sm ${
+                        formData.shippingMethod === "ARAS"
+                          ? "text-purple-700"
+                          : "text-gray-700"
+                      }`}
+                    >
+                      ARAS Kargo
+                    </p>
+                  </div>
+                </label>
+                <label
+                  className={`cursor-pointer border-2 rounded-xl p-4 transition-all ${
+                    formData.shippingMethod === "PTT"
+                      ? "border-purple-500 bg-purple-50 ring-2 ring-purple-200"
+                      : "border-gray-300 hover:border-purple-300"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="shippingMethod"
+                    value="PTT"
+                    checked={formData.shippingMethod === "PTT"}
+                    onChange={handleChange}
+                    className="hidden"
+                  />
+                  <div className="text-center">
+                    <div className="text-3xl mb-2">📮</div>
+                    <p
+                      className={`font-bold text-sm ${
+                        formData.shippingMethod === "PTT"
+                          ? "text-purple-700"
+                          : "text-gray-700"
+                      }`}
+                    >
+                      PTT Kargo
                     </p>
                   </div>
                 </label>

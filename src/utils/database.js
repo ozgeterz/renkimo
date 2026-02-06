@@ -13,6 +13,7 @@ export const saveOrder = async (orderData) => {
           address: orderData.address,
           selected_products: orderData.selectedProducts,
           payment_method: orderData.paymentMethod,
+          shipping_method: orderData.shippingMethod,
           total_price: orderData.totalPrice,
           created_at: new Date().toISOString(),
         },
