@@ -23,7 +23,7 @@ const productVariants = [
 const getTotalPrice = (productCount) => {
   if (productCount === 1) return 1299;
   if (productCount === 2) return 2000;
-  if (productCount === 3) return 3000;
+  if (productCount === 3) return 3100;
   if (productCount === 4) return 4499;
   if (productCount >= 5) return 4499 + (productCount - 4) * 1000;
   return 0;
