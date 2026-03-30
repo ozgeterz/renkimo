@@ -22,10 +22,10 @@ const productVariants = [
 
 const getTotalPrice = (productCount) => {
   if (productCount === 1) return 1299;
-  if (productCount === 2) return 2000;
-  if (productCount === 3) return 3100;
-  if (productCount === 4) return 4499;
-  if (productCount >= 5) return 4499 + (productCount - 4) * 1000;
+  if (productCount === 2) return 1999;
+  if (productCount === 3) return 2999;
+  if (productCount === 4) return 3999;
+  if (productCount >= 5) return 4999 + (productCount - 4) * 1000;
   return 0;
 };
 
@@ -316,15 +316,15 @@ function ProductPage() {
               <div className="flex justify-center items-center gap-2 flex-wrap">
                 <div className="bg-white/20 backdrop-blur-sm rounded-lg px-2 py-2">
                   <p className="text-xs opacity-90">1 Adet</p>
-                  <p className="text-base font-bold">1.499 TL</p>
+                  <p className="text-base font-bold">1.199 TL</p>
                 </div>
                 <div className="bg-white/30 backdrop-blur-sm rounded-lg px-2 py-2 border-2 border-yellow-300">
                   <p className="text-xs opacity-90">2 Adet</p>
-                  <p className="text-base font-bold">2.599 TL</p>
+                  <p className="text-base font-bold">1999 TL</p>
                 </div>
                 <div className="bg-white/30 backdrop-blur-sm rounded-lg px-2 py-2 border-2 border-yellow-300">
                   <p className="text-xs opacity-90">3 Adet</p>
-                  <p className="text-base font-bold">3.499 TL</p>
+                  <p className="text-base font-bold">2999 TL</p>
                 </div>
               </div>
               <p className="text-xs mt-2 opacity-90">
@@ -707,7 +707,7 @@ function ProductPage() {
                           {variant.name}
                         </p>
                         <p className="text-xs font-bold text-purple-600 text-center mt-1">
-                          1.499 TL
+                          1.199 TL
                         </p>
                         <div className="flex items-center justify-center gap-2 mt-2">
                           <button
