@@ -21,7 +21,7 @@ const productVariants = [
 ];
 
 const getTotalPrice = (productCount) => {
-  if (productCount === 1) return 1299;
+  if (productCount === 1) return 1199;
   if (productCount === 2) return 1999;
   if (productCount === 3) return 2999;
   if (productCount === 4) return 3999;
